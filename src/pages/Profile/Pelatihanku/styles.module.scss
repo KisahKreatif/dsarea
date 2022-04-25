@@ -1,0 +1,19 @@
+.Container {
+  width: 100%;
+  height: 100%;
+  background-color: #F5F5F5;
+  @media (max-width: 1100px) {
+    padding-left: 120px;
+  }
+  @media (max-width: 500px) {
+    padding-left: 0px;
+  }
+}
+
+.Conditioner {
+  padding-left: 30px;
+  padding-right: 70px;
+  @media (max-width: 1100px) {
+    padding-right: 30px;
+  }
+}

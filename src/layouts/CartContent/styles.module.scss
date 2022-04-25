@@ -1,0 +1,28 @@
+.Container { 
+  width: 100%;
+}
+
+.Title {
+  margin-inline: 70px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  span {
+    font-size: 36px;
+    font-weight: 600;
+    color: #000;
+    @media (max-width: 500px) {
+      font-size: 24px;
+    }
+  }
+}
+
+.Content {
+  width: 100%;
+  padding-inline: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  @media (max-width: 500px) {
+    padding-inline: 0px;
+    justify-content: center;
+  }
+}

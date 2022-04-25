@@ -1,0 +1,83 @@
+.Container {
+  height: calc(100vh - 75px);
+  width: 280px;
+  background-color: #FBFBFB;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 25px;
+  padding-block: 35px;
+  justify-content: space-between;
+  position: sticky;
+  top: 75px;
+  transition: 0.2s;
+  @media (max-width: 1180px) {
+    position: fixed;
+    width: 120px;
+    z-index: 2;
+  }
+  @media (max-width: 1080px) {
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+
+  &:hover {
+    transition: 0.2s;
+    width: 280px;
+    .RouteButton {
+      @media (max-width: 1180px) {
+        // padding-inline: 0px;
+        justify-content: flex-start;
+      }
+      span {
+        @media (max-width: 1180px) {
+          display: inline;
+        }
+      }
+    }
+  }
+  
+  .RouteButton {
+    width: 100%;
+    height: 46px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    padding-inline: 13px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+    img {
+      height: 20px;
+      aspect-ratio: 1;
+      margin-right: 13px;
+      @media (max-width: 1180px) {
+        margin-left: 12px;
+      }
+    }
+    span {
+      text-transform: capitalize;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: #6F6F70;
+      white-space: nowrap;
+      @media (max-width: 1180px) {
+        display: none;
+      }
+    }
+
+    &.Active {
+      span {
+        color: #FFF;
+      }
+      background-color: #5CC9CD;
+    }
+  }
+
+  .Control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}

@@ -1,0 +1,123 @@
+.Footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+
+.FooterTopSide {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  padding-bottom: 35px;
+  .FooterPaddingInline {
+    padding-inline: 67px;
+  }
+}
+
+.FooterLogoImage {
+  width: 104px;
+  aspect-ratio: 1;
+  margin-left: -19px;
+}
+
+.FooterTagLine {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3B969A;
+}
+
+.FooterBottomSide {
+  width: 100%;
+  padding-bottom: 80px;
+  display: flex;
+  .FooterPaddingInline {
+    padding-inline: 67px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    @media (min-width: 900px) {
+      display: grid;
+      grid-template-columns: 4fr 1.5fr 1.5fr;
+    }
+  }
+}
+
+.FooterBottomControl {
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 900px) {
+    margin-bottom: 20px;
+  }
+}
+
+.FooterBottomTitle {
+  color: #000;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
+}
+
+.FooterBottomLinkWrapper {
+  margin-top: 10px;
+  @media (max-width: 500px) {
+    margin-top: 0px;
+  }
+}
+
+.FooterBottomSpan {
+  color: #000;
+  font-size: 14px;
+  margin-top: 10px;
+  @media (max-width: 500px) {
+    font-size: 10px;
+  }
+}
+
+.FooterBottomLink {
+  color: #000;
+  font-size: 14px;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 500px) {
+    font-size: 10px;
+  }
+}
+
+.FooterSocialMedia {
+  padding-block: 20px;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  gap: 10px;
+  @media (max-width: 500px) {
+    grid-template-columns: 50px 50px;
+    grid-template-rows: 50px 50px;
+  }
+}
+
+.FooterInstagram {
+  width: 39px;
+  aspect-ratio: 1;
+}
+
+.FooterTwitter {
+  aspect-ratio: 1;
+  width: 44px;
+}
+
+.FooterLinkedin {
+  aspect-ratio: 1;
+  width: 47px;
+}
+
+.FooterTiktok {
+  aspect-ratio: 1;
+  width: 50px;
+}

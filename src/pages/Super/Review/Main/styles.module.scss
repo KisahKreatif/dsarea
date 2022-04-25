@@ -1,0 +1,12 @@
+.Container { 
+  width: 100%;
+  height: 100%;
+  @media (max-width: 1180px) {
+    margin-left: 120px;
+  }
+}
+
+.Content {
+  width: 100%;
+  padding-inline: 30px;
+}

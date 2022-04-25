@@ -1,0 +1,173 @@
+@import 'include-media';
+
+$breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px) !default;
+
+.Container {
+  width: 100%;
+  background-color: #5ACACC;
+  display: grid;
+  grid-template-columns: 1fr 800px;
+  column-gap: 10px;
+  padding-inline: 70px;
+  padding-top: 100px;
+  padding-bottom: 90px;
+  @media (max-width: 900px) {
+    margin-top: 60px;
+  }
+
+  @media screen and (max-width: 1700px) {
+    grid-template-columns: 1fr 1.3fr;
+  }
+
+  @media screen and (min-width: 1250px) {
+    min-height: 620px;
+  }
+
+  @media screen and (max-width: 1250px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding-inline: 40px;
+  }
+
+  @include media ("<=phone") {
+    padding-inline: 20px;
+    padding-top: 40px;
+    padding-bottom: 35px;
+  }
+
+  .Content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    .Title {
+      font-size: 48px;
+      font-weight: 700;
+      color: #FFF;
+
+      @include media("<=tablet", ">phone") {
+        font-size: 32px;
+      }
+
+      @include media("<=phone") {
+        font-size: 20px;
+      }
+
+      span {
+        color: #0E4647;
+      }
+    }
+
+    .Info {
+      font-size: 20px;
+      color: #FFF;
+      margin-top: 10px;
+      margin-bottom: 40px;
+
+      @include media("<=tablet", ">phone") {
+        font-size: 12px;
+      }
+
+      @include media("<=phone") {
+        font-size: 6px;
+      }
+    }
+
+    button {
+      height: calc(77px);
+      width: calc(230px);
+      background-color: #0E4647;
+      border-radius: 38.5px;
+      font-size: 20px;
+      font-weight: 500;
+      text-transform: capitalize;
+      font-family: 'Poppins', sans-serif;
+
+      @include media("<=tablet") {
+        height: calc(77px*3/5);
+        width: calc(230px*3/5);
+        font-size: calc(10px);
+        border-radius: calc(38.5px*3/5);
+      }
+    }
+  }
+
+  & > .Image {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-image: url('../../assets/png/marketing_manager_logo.png');
+    background-repeat: no-repeat;
+    background-size: 450px 450px;
+    background-position-x: 150px;
+    background-position-y: -10px;
+
+    @media (max-width: 1250px) {
+      display: none;
+    }
+
+    .Control {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .Card {
+        background-color: #FFF;
+        border-radius: 10px;
+        width: 252px;
+        height: 70px;
+        display: flex;
+        padding: 5px;
+        align-items: center;
+
+        .Image {
+          height: 100%;
+          aspect-ratio: 1;
+          background-color: #3A9699;
+          border-radius: 6px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            aspect-ratio: 1;
+            height: 40px;
+          }
+        }
+
+        div:not(.Image) {
+          padding-left: 10px;
+          span {
+            font-size: 16px;
+            font-weight: 500;
+          }
+        }
+
+        &.Trusted {
+          width: 252px;
+          height: 70px;
+        }
+
+        &.Schedule {
+          width: 221px;
+          height: 70px;
+          transform: translate(-30px, -60px);
+        }
+
+        &.Alumni {
+          width: 207px;
+          height: 70px;
+          transform: translate(20px, -50px);
+        }
+
+        &.Subject {
+          width: 304px;
+          height: 70px;
+          transform: translate(0px, -50px);
+        }
+      }
+    }
+  }
+}

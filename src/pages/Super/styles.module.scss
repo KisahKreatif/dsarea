@@ -1,0 +1,45 @@
+.Container {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #F4F4F4;
+}
+
+.Body {
+  min-height: calc(100vh - 75px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  @media (max-width: 1180px) {
+    display: flex;
+  }
+  @media (max-width: 800px) {
+    display: none;
+  }
+  @media (max-height: 420px) {
+    display: none;
+  }
+}
+
+.Unsupported {
+  display: none;
+  min-height: calc(100vh - 75px);
+  @media (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  @media (max-height: 420px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  span {
+    font-size: 24px;
+    color: #0E4647;
+    font-weight: 600;
+    text-align: center;
+    padding-inline: 50px;
+  }
+}

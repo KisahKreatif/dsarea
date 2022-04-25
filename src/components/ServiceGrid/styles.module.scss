@@ -1,0 +1,142 @@
+.Container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.Grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  @media (max-width: 1180px) {
+    gap: 15px;
+  }
+  @media (max-width: 1125px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+.Card {
+  width: 310px;
+  height: 286px;
+  border-radius: 15px;
+  background: linear-gradient(120.93deg, rgba(194, 229, 230, 0.39) -1.61%, rgba(16, 190, 196, 0.51) 102.57%);
+  padding: 15px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @media (max-width: 1400px) {
+    width: calc(310px * 4/5);
+    height: calc(286px * 4/5);
+    padding: 10px 16px 16px 16px;
+  }
+  @media (max-width: 580px) {
+    width: calc(310px * 3/5);
+    height: calc(286px * 3/5);
+  }
+  @media (max-width: 450px) {
+    width: calc(310px * 2.3/5);
+    height: calc(286px * 2.3/5);
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+    @media (max-width: 1400px) {
+      width: calc(100px * 4/5);
+      height: calc(100px * 4/5);
+    }
+    @media (max-width: 580px) {
+      width: calc(100px * 3/5);
+      height: calc(100px * 3/5);
+    }
+    @media (max-width: 450px) {
+      width: calc(100px * 2/5);
+      height: calc(100px * 2/5);
+    }
+  }
+
+  .Title {
+    span {
+      font-size: 24px;
+      font-weight: 600;
+      color: #3A9699;
+      @media (max-width: 1400px) {
+        font-size: calc(24px * 4/5);
+      }
+      @media (max-width: 580px) {
+        font-size: calc(24px * 3/5);
+      }
+      @media (max-width: 450px) {
+        font-size: calc(24px * 2/5);
+      }
+    }
+  }
+
+  .Body {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    @media (max-width: 1400px) {
+      margin-bottom: 10px;
+      margin-top: 0px;
+    }
+    span {
+      color: #0E4647;
+      font-size: 14px;
+      @media (max-width: 1400px) {
+        font-size: calc(14px * 4/5);
+      }
+      @media (max-width: 580px) {
+        display: block;
+        font-size: calc(14px * 3/5);
+      }
+      @media (max-width: 450px) {
+        font-size: calc(14px * 2/5);
+      }
+    }
+  }
+
+  .Action {
+    button {
+      height: 46px;
+      width: 138px;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: capitalize;
+      font-family: 'Poppins', sans-serif !important;
+      border: 1px solid #3A9699;
+      color: #0E4647;
+      @media (max-width: 1400px) {
+        font-size: calc(13px * 4/5);
+        height: calc(46px * 4/5);
+        width: calc(150px * 4/5);
+      }
+      @media (max-width: 580px) {
+        font-size: calc(13px * 3/5);
+        height: calc(46px * 3/5);
+        width: calc(180px * 3/5);
+      }
+      @media (max-width: 450px) {
+        font-size: calc(13px * 2/5);
+        height: calc(46px * 2/5);
+        width: calc(180px * 2/5);
+      }
+      span {
+        white-space: nowrap;
+      }
+      img {
+        height: 25px;
+        width: 25px;
+        @media (max-width: 580px) {
+          height: calc(25px*3/5);
+          width: calc(25px*3/5);
+        }
+        @media (max-width: 450px) {
+          height: calc(25px*2/5);
+          width: calc(25px*2/5);
+        }
+      }
+    }
+  }
+}

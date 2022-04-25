@@ -1,0 +1,43 @@
+.Container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 30px;
+  padding-bottom: 100px;
+  
+  & > div {
+    width: 100%;
+  }
+}
+
+.Control {
+  margin-bottom: 15px;
+
+  & > label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  &.Off {
+    display: none;
+  }
+
+  .Rating {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #FAFAFA;
+    border: 1px solid #D9E9EA;
+    border-radius: 8px;
+    padding-inline: 13px;
+    display: flex;
+    flex-direction: column;
+    & > label {
+      font-weight: 500;
+      font-size: 14px;
+      color: #000;
+      margin-bottom: 15px;
+    }
+  }
+}

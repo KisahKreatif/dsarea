@@ -1,0 +1,201 @@
+.Header {
+  width: 100%;
+  height: 75px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 5px 5px #0000000D;
+  padding-left: 10px;
+  padding-right: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  @media (max-width: 1080px) {
+    height: 60px;
+    padding-right: 40px;
+  }
+  @media (max-width: 900px) {
+    position: fixed;
+    width: 100vw;
+  }
+  @media (max-width: 480px) {
+    padding-right: 20px;
+  }
+  @media (max-width: 370px) {
+    padding-right: 10px;
+  }
+}
+
+.Control {
+  height: 100%;
+  align-items: center;
+  display: flex;
+
+  .SearchInput {
+    display: flex;
+    button {
+      width: 40px;
+    }
+  }
+
+  .HeaderLogoImage {
+    height: 58px;
+    aspect-ratio: 1;
+    margin-inline: 45px;
+    &.Pushed {
+      @media (max-width: 500.1px) {
+        display: none;
+      }
+    }
+    @media (max-width: 1100px) {
+      margin-inline: 25px;
+    }
+    @media (max-width: 480px) {
+      margin-inline: 10px;
+    }
+    @media (max-width: 370px) {
+      margin-left: 0px;
+    }
+  }
+
+  & > button {
+    height: 50px;
+    margin-left: 30px;
+    width: 50px;
+    &.More {
+      margin-left: 10px;
+      svg {
+        margin-right: 0;
+      }
+      @media (min-width: 500.1px) {
+        display: none;
+      }
+      &.None {
+        display: none;
+      }
+    }
+    @media (max-width: 500.1px) {
+      margin-left: 10px;
+    }
+    svg {
+      margin-right: 3px;
+    }
+    & > div {
+      width: 15px;
+      aspect-ratio: 1;
+      background-color: #E39862;
+      position: absolute;
+      transform: translate(10px, -10px);
+      border-radius: 50%;
+    }
+  }
+
+  input {
+    height: 40px;
+    width: 250px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid #D9E9EA;
+    padding-left: 20px;
+    padding-right: 40px;
+    transform: translateX(42px);
+    margin-left: -42px;
+    @media (max-width: 1000px) {
+      width: 220px;
+      font-size: 12px;
+      height: 35px;
+    }
+    @media (max-width: 480px) {
+      width: 150px;
+      font-size: 9px;
+    }
+  }
+}
+
+.HeaderGrid {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.HeaderLink {
+  margin-inline: 20px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  user-select: none;
+  cursor: pointer;
+  @media (max-width: 1080px) {
+    font-size: 12px;
+  }
+
+  &.Bold {
+    font-weight: 600;
+  }
+
+  &.Home {
+    width: 50px;
+    @media (max-width: 1080px) {
+      width: 35px;
+    }
+  }
+  &.Training {
+    width: 120px;
+    @media (max-width: 1080px) {
+      width: 95px;
+    }
+  }
+  &.Service {
+    width: 50px;
+    @media (max-width: 1080px) {
+      width: 35px;
+    }
+  }
+  &.Ask {
+    width: 90px;
+    @media (max-width: 1080px) {
+      width: 75px;
+    }
+  }
+
+  &:hover {
+    font-weight: 600;
+  }
+}
+
+.HeaderLoginButton {
+  height: 37px !important;
+  width: 107px !important;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 18.5px !important;
+  border-color: #0E4647 !important;
+  color: #3B9699 !important;
+  user-select: none;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    border-color: #0E4647;
+  }
+}
+
+.ProfilePicture {
+  height: 46.5px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin-left: 30px;
+  cursor: pointer;
+  user-select: none;
+  @media (max-width: 500.1px) {
+    margin-left: 10px;
+  }
+}

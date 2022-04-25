@@ -1,0 +1,105 @@
+.Container {
+  width: 100%;
+}
+
+.Card {
+  width: 100%;
+  background-color: #FFF;
+  border: 1px solid #D9E9EA;
+  border-radius: 15px;
+  display: flex;
+  margin-bottom: 20px;
+
+  .Image {
+    padding: 30px;
+    img {
+      height: 130px;
+    }
+  }
+
+  .Info {
+    padding: 30px 30px 30px 0px;
+    .Title {
+      margin-bottom: 15px;
+      span {
+        font-weight: 600;
+        font-size: 30px;
+        color: #0E4647;
+      }
+    }
+    .Prices {
+      display: flex;
+      flex-direction: column;
+      span {
+        margin-bottom: 5px;
+        font-size: 24px;
+        font-weight: 500;
+        color: #3A9699;
+      }
+    }
+  }
+}
+
+.Content {
+  width: 100%;
+  .Switcher {
+    display: flex;
+    align-items: center;
+    button {
+      height: 38px;
+      padding-inline: 30px;
+      background-color: transparent;
+      border-radius: 27.5px;
+      color: #000;
+      text-transform: capitalize;
+      font-family: 'Poppins', sans-serif;
+      margin-right: 10px;
+
+      &.Active {
+        background-color: #0E4647;
+        color: #FFF;
+      }
+    }
+  }
+
+  .Description {
+    span {
+      font-size: 14px;
+      color: #000;
+    }
+
+    ul {
+      li {
+        font-size: 14px;
+        color: #000;
+      }
+    }
+
+    .Details {
+      display: flex;
+    }
+  }
+
+  .Info {
+    width: 300px;
+    span {
+      font-size: 14px;
+      color: #000;
+      display: block;
+    }
+  }
+
+  & > div {
+    &:not(.Switcher) {
+      display: none;
+      margin-top: 30px;
+      &.Active {
+        display: block;
+      }
+    }
+  }
+}
+
+.None {
+  display: none;
+}

@@ -1,0 +1,244 @@
+.Container {
+  width: 100%;
+}
+
+.Card {
+  width: 100%;
+  background-color: #FFF;
+  border-radius: 15px;
+  box-shadow: 0px 4px 14px 6px #0000000A;
+  margin-bottom: 15px;
+  padding: 10px 20px 10px 20px;
+  .Title {
+    margin-bottom: 15px;
+    margin-top: 10px;
+    span {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0E4647;
+    }
+  }
+
+  &.Off {
+    display: none;
+  }
+}
+
+.PackageControl {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  label {
+    font-size: 14px;
+    color: #727272;
+    margin-bottom: 5px;
+  }
+  input {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+.Interact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    font-size: 10px;
+    color: #3A9697;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-family: 'Poppins', sans-serif;
+    width: 120px;
+    border: 1px solid #3A9697;
+    height: 32px;
+    border-radius: 6px;
+
+    &.Copy {
+      width: 70px;
+    }
+  }
+}
+
+.Control {
+  margin-block: 10px;
+  input {
+    font-family: 'Poppins', sans-serif;
+  }
+  & > label {
+    font-size: 12px;
+    color: #727272;
+  }
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+  }
+  .QR {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-block: 20px;
+  }
+
+  & > svg {
+    width: 50px;
+  }
+
+  .TransactionType {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    & > img {
+      height: 40px;
+      margin-right: 20px;
+    }
+    span {
+      color: #727272;
+    }
+  }
+}
+
+.Companion {
+  border-top: 0.5px solid #254446;
+  margin-top: 15px;
+  padding-top: 5px;
+
+  &.Disabled {
+    display: none;
+  }
+}
+
+.Payment {
+  border-top: 1px solid #0E4647;
+  padding-top: 20px;
+  margin-top: 25px;
+  width: 100%;
+  .Method {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #D9E9EA;
+
+    & > button {
+      width: 100%;
+      background-color: #3A9697;
+      color: #FFF;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: capitalize;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: space-between;
+      height: 51px;
+      padding-left: 15px;
+      
+      &.Active {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+
+      svg {
+        transition: 0.2s;
+        font-size: 30px;
+      }
+    }
+
+    .Methods {
+      height: 0px;
+      opacity: 0;
+      transition: 0.2s;
+      &.Active {
+        opacity: 1;
+        height: 160px;
+      }
+      button {
+        width: 100%;
+        color: #000;
+        font-size: 13px;
+        text-transform: capitalize;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        column-gap: 10px;
+        justify-content: flex-start;
+        height: 51px;
+        padding-left: 15px;
+        border-radius: 0;
+        transition: 0.2s;
+
+        div {
+          &:first-child {
+            height: 100%;
+            width: 120px;
+            margin-right: 10px;
+            img {
+              height: 90%;
+              width: auto;
+            }
+          }
+          &.Radio {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+        
+        &.Active {
+          svg {
+            transform: rotate(180deg);
+          }
+          &:last-child {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+  
+        svg {
+          transition: 0.2s;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  .Total {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 20px;
+    span {
+      &:first-child {
+        color: #727272;
+        font-size: 14px;
+      }
+
+      &:last-child {
+        color: #000;
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .Next {
+    display: flex;
+    justify-content: flex-end;
+    padding-block: 10px;
+    button {
+      background-color: #3A9697;
+      height: 49px;
+      border-radius: 6px;
+      color: #FFF;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      text-transform: capitalize;
+      padding-inline: 15px;
+    }
+  }
+}

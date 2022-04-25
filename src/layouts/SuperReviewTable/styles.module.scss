@@ -1,0 +1,90 @@
+.Table {
+  table {
+    
+    width: 100%;
+    border-spacing: 0 10px;
+
+    &.Body {
+      border-spacing: 0 15px;
+    }
+
+    .Action {
+      button {
+        img {
+          height: 29px;
+          aspect-ratio: 1;
+        }
+      }
+    }
+    
+    th, td {
+      text-align: start;
+      font-size: 14px;
+
+      &:first-child {
+        width: 30px;
+      }
+
+      &:last-child {
+        width: 30px;
+      }
+
+      &:not(:first-child, :last-child) {
+        padding-inline: 10px;
+        width: 200px;
+      }
+    }
+
+    tr {
+      background-color: #FBFBFB;
+      th {
+        &:first-child {
+          border-top-left-radius: 8px;
+          border-bottom-left-radius: 8px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 8px;
+          border-bottom-right-radius: 8px;
+        }
+      }
+    }
+
+    thead {
+      tr {
+        height: 51px;
+        th {
+          font-weight: 500;
+        }
+      }
+    }
+
+    tbody {
+      .Control {
+        width: calc(15vw);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+      }
+      tr {
+        height: 70px;
+        td {
+          div {
+            display: flex;
+            flex-direction: column;
+          }
+          &:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+          }
+    
+          &:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+          }
+        }
+      }
+    }
+  }
+}

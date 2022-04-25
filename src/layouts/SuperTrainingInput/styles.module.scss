@@ -1,0 +1,224 @@
+.Container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 30px;
+  padding-bottom: 100px;
+  
+  & > div {
+    width: 100%;
+  }
+}
+
+.Control {
+  margin-bottom: 15px;
+
+  & > label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  &.Off {
+    display: none;
+  }
+
+  .Benefits {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    background-color: #FAFAFA;
+    border: 1px solid #D9E9EA;
+    border-radius: 8px;
+    padding-inline: 13px;
+    & > label {
+      font-weight: 500;
+      font-size: 14px;
+      color: #000;
+      margin-bottom: 15px;
+    }
+    div {
+      display: flex;
+      align-items: center;
+      transform: translateX(-10px);
+      label {
+        font-weight: 500;
+        font-size: 14px;
+        color: #727272;
+      }
+    }
+  }
+}
+
+.LogoPicker {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -7.5px;
+
+  .PickButton{
+    width: 75px;
+    aspect-ratio: 1;
+    margin: 7.5px;
+    border-radius: 10px;
+    border: 1px solid #E9E9EE;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    &.Active {
+      background-color: #D9E9EA;
+    }
+  }
+}
+
+.Divider {
+  width: 100%;
+  border-top: 1px solid #6F6F70;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  span {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+  }
+}
+
+.SimulatedCard {
+  position: sticky;
+  top: 100px;
+  width: 100%;
+  min-height: 500px;
+  border: 1px solid #D9E9EA;
+  background-color: #FFF;
+  border-radius: 10px;
+  padding: 17px 27px 20px 27px;
+  .Logo {
+    margin-bottom: 10px;
+    img {
+      height: 70px;
+      width: 70px;
+      object-fit: contain;
+    }
+  }
+  .Title {
+    margin-bottom: 10px;
+    span {
+      font-weight: 600;
+      font-size: 20px;
+      color: #0E4647;
+    }
+  }
+  .Prices {
+    display: flex;
+    flex-direction: column;
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #3A9699;
+      margin-bottom: 5px;
+    }
+  }
+
+  .ClassBenefits {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    & > div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+
+      & > div {
+        height: 21px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: #F5F6F8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          height: 13px;
+          aspect-ratio: 1;
+        }
+      }
+      span {
+        font-weight: 500;
+        font-size: 12px;
+        color: #0E4647;
+        margin-left: 9px;
+      }
+    }
+  }
+  .SecondTitle {
+    @extend .Title;
+    span {
+      font-size: 18px !important;
+    }
+    padding-top: 25px;
+    border-top: 1px solid #6F6F70;
+    margin-bottom: 20px;
+  }
+  .TimeDescription {
+    width: 300px;
+    margin-bottom: 25px;
+    label {
+      font-size: 12px;
+      color: #727272;
+    }
+    span {
+      font-size: 14px;
+      color: #000;
+      display: block;
+      white-space: normal;
+    }
+  }
+  & > .Links {
+    margin-top: 25px;
+    & > div {
+      display: flex;
+      width: 100%;
+      & > div {
+        margin-left: 10px;
+        width: 250px;
+        margin-bottom: 15px;
+        span {
+          word-wrap: break-word;
+          font-size: 12px;
+          text-decoration: underline;
+          color: #135EF1;
+          cursor: pointer;
+          user-select: none;
+
+          &:active {
+            color: red;
+          }
+        }
+      }
+    }
+    ul {
+      padding-left: 0;
+      list-style-type: none;
+      li {
+        display: flex;
+        align-items: flex-start;
+        div {
+          margin-left: 10px;
+          width: 200px;
+          text-overflow: ellipsis;
+          a {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.None {
+  display: none !important;
+}

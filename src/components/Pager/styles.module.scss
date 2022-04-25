@@ -1,0 +1,47 @@
+.Back {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.Breadcrumbs {
+  padding-top: 20px;
+  padding-bottom: 25px;
+
+  .Description {
+    width: 90%;
+  }
+
+  & > span, & > a {
+    font-size: 36px;
+    font-weight: 600;
+  }
+
+  span {
+    color: #000;
+  }
+
+  a {
+    color: #6F6F70;
+    text-decoration: none;
+  }
+}
+
+.Control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    height: 47px;
+    border-radius: 32px;
+    background-color: #5CC9CD;
+    text-transform: capitalize;
+    width: 139px;
+    color: #FFF;
+
+    &:hover {
+      background-color: #5CC9CD;
+    }
+  }
+}
