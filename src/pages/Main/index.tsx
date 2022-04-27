@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { AuthContext } from '../../App'
 import { useWindowDimensions } from '../../hooks'
 import { debounce } from '@mui/material'
+import { useLocation, useParams, useSearchParams } from 'react-router-dom'
 
 export default function MainPage() {
   const { isSuper } = useContext(AuthContext)
@@ -23,6 +24,7 @@ export default function MainPage() {
   const trainingRef: any = useRef(null)
   const serviceRef: any = useRef(null)
   const askRef: any = useRef(null)
+  const location = useLocation()
   useEffect(() => {
     dispatch(TrainingAction.fetch(isSuper ? token : undefined ))
 
@@ -33,21 +35,18 @@ export default function MainPage() {
   }, [])
 
   useEffect(() => {
-    console.log(askRef.current.getBoundingClientRect().top, 'tanya-kami');
-    console.log(serviceRef.current.getBoundingClientRect().top, 'jasa');
-    console.log(trainingRef.current.getBoundingClientRect().top, 'online-training');
-    
-  }, [scrollPosition])
+    if (location.state) 
+      onChangePosition(location.state, 'auto')
+  }, [location])
 
   useEffect(() => {
-    console.log(windowHeight, scrollPosition, 'height')
     if (askRef.current.getBoundingClientRect().top <= 500) setPosition('tanya-kami')
     else if (serviceRef.current.getBoundingClientRect().top <= 300) setPosition('jasa')
     else if (trainingRef.current.getBoundingClientRect().top <= 300) setPosition('online-training')
     else setPosition('home')
   }, [scrollPosition])
 
-  const onChangePosition = (toLocation: 'online-training' | 'jasa' | 'tanya-kami' | 'home', behavior: any = 'smooth') => {
+  const onChangePosition = (toLocation: 'online-training' | 'jasa' | 'tanya-kami' | 'home' | any, behavior: any = 'smooth') => {
     switch (toLocation) {
       case 'online-training':
         trainingRef.current.scrollIntoView({ behavior, block: 'center' })

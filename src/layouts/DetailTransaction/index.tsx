@@ -1,10 +1,14 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
-import { Button, CircularProgress, MenuItem, Radio, styled, TextField } from '@mui/material'
-import React, { useCallback, useState } from 'react'
-import { BCA_TRANSACTION_LOGO, MANDIRI_TRANSACTION_LOGO, QRIS_TRANSACTION_LOGO } from '../../assets/png';
+import { Button, CircularProgress, InputAdornment, MenuItem, Modal, Radio, Skeleton, styled, TextField, Typography } from '@mui/material'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { BCA_TRANSACTION_LOGO, DANA_TRANSACTION_LOGO, LINKAJA_TRANSACTION_LOGO, MANDIRI_TRANSACTION_LOGO, OVO_TRANSACTION_LOGO, QRIS_TRANSACTION_LOGO, SHOPEEPAY_TRANSACTION_LOGO } from '../../assets/png';
 import Styles from './styles.module.scss'
 import { QRCodeCanvas } from 'qrcode.react'
 import copy from 'copy-to-clipboard'
+import { useSelector } from 'react-redux';
+import { iDetailTransactProps } from './index.interface';
+import onRupiah from '../../helpers/onRupiah';
+import TransactionAction from '../../store/reducers/transaction/actions';
 
 const CssTextField = styled(TextField)({
   '& label': {
@@ -45,31 +49,68 @@ function CopyButton (props: any) {
   )
 }
 
-export default function DetailTransaction() {
-  const [buyPackage, setBuyPackage]: [string, Function] = useState('sendiri')
+export default function DetailTransaction(props: iDetailTransactProps) {
+  const { data, setData } = props
   const [showMethods, setShowMethods]: [number, Function] = useState(0)
-  const [paymentMethod, setPaymentMethod]: [string, Function] = useState('qris')
   const [paymentDetail, setPaymentDetail]: [any, Function] = useState(null)
-  // {
-  //   id: '12345',
-  //   status: 'Belum dibayar',
-  //   metode: 'qris',
-  //   bayar: '12314112412412121'
-  // }
+  const [loading, setLoading]: [number, Function] = useState(1)
+
+  const { profile } = useSelector(({ user }: any) => user)
+
+  useEffect(() => {
+    setLoading(0)
+  }, [data])
+
+  const token : any = useMemo(() => {
+    const access_token = localStorage.getItem('token')
+
+    if (access_token)
+      return access_token
+    
+    return null
+  }, [profile])
 
   const TransactionTypeCallback = useCallback(() => {
-    if (paymentDetail?.metode === 'bca') {
+    if (paymentDetail?.paymentMethod === 'bca') {
       return (
         <div className={ Styles.TransactionType }>
           <img src={ BCA_TRANSACTION_LOGO } alt="BCA_TRANSACTION_LOGO" />
           <span>BCA Virtual Account</span>
         </div>
       )
-    } else if (paymentDetail?.metode === 'mandiri') {
+    } else if (paymentDetail?.paymentMethod === 'mandiri') {
       return (
         <div className={ Styles.TransactionType }>
           <img src={ MANDIRI_TRANSACTION_LOGO } alt="MANDIRI_TRANSACTION_LOGO" />
           <span>Mandiri Virtual Account</span>
+        </div>
+      )
+    } else if (paymentDetail?.paymentMethod === 'ID_DANA') {
+      return (
+        <div className={ Styles.TransactionType }>
+          <img src={ DANA_TRANSACTION_LOGO } alt="DANA_TRANSACTION_LOGO" />
+          <span></span>
+        </div>
+      )
+    } else if (paymentDetail?.paymentMethod === 'ID_OVO') {
+      return (
+        <div className={ Styles.TransactionType }>
+          <img src={ OVO_TRANSACTION_LOGO } alt="OVO_TRANSACTION_LOGO" />
+          <span></span>
+        </div>
+      )
+    } else if (paymentDetail?.paymentMethod === 'ID_LINKAJA') {
+      return (
+        <div className={ Styles.TransactionType }>
+          <img src={ LINKAJA_TRANSACTION_LOGO } alt="LINKAJA_TRANSACTION_LOGO" />
+          <span>Link Aja</span>
+        </div>
+      )
+    } else if (paymentDetail?.paymentMethod === 'ID_SHOPEEPAY') {
+      return (
+        <div className={ Styles.TransactionType }>
+          <img src={ SHOPEEPAY_TRANSACTION_LOGO } alt="SHOPEEPAY_TRANSACTION_LOGO" />
+          <span>Shopeepay</span>
         </div>
       )
     }
@@ -82,31 +123,87 @@ export default function DetailTransaction() {
   }, [paymentDetail])
 
   const TransactionCallback = useCallback(() => {
-    if (paymentDetail?.metode !== 'qris') {
-      return (
-        <div className={ Styles.Interact }>
+    if (paymentDetail) {
+      if (paymentDetail?.metode === 'qris') {
+        return (
           <div className={ Styles.Control }>
-            <label>No. Virtual Account</label>
-            <div>
-              <span>88085081211918150</span>
+            <label>Scan QR untuk bayar melalui QRIS</label>
+            <div className={ Styles.QR }>
+              <QRCodeCanvas size={ 200 } value={ 'https://google.com' }/>
             </div>
           </div>
-          <CopyButton value={ '88085081211918150' }/>
-        </div>
-      )
+        )
+      } else if (paymentDetail?.metode === 'va') {
+        return (
+          <div className={ Styles.Interact }>
+            <div className={ Styles.Control }>
+              <label>No. Virtual Account</label>
+              <div>
+                <span>88085081211918150</span>
+              </div>
+            </div>
+            <CopyButton value={ '88085081211918150' }/>
+          </div>
+        )
+      }
     }
     return (
-      <div className={ Styles.Control }>
-        <label>Scan QR untuk bayar melalui QRIS</label>
-        <div className={ Styles.QR }>
-          <QRCodeCanvas size={ 200 } value={ 'https://google.com' }/>
-        </div>
-      </div>
+      <div/>
     )
   }, [paymentDetail])
 
+  const onChangeData = (e: any) => {
+    setData((prev: any) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault()
+    try {
+      setLoading(1)
+      if (!data.paymentMethod) {
+        setShowMethods(1)
+        return setLoading(0)
+      }
+      if (!token) {
+        const api: string = 'https://api.dsarea.com'
+        const googleLoginURL = `${api}/api/auth/login/google`
+        window.open(googleLoginURL, "_blank")
+        return setLoading(0)
+      }
+      const { data: { data: result } } = await TransactionAction.charge({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined }, token)
+      setPaymentDetail(result)
+      setLoading(0)
+      switch (result.paymentMethod) {
+        case 'ID_OVO':
+          break;
+        case 'ID_SHOPEEPAY':
+          window.open(result.action.mobile_deeplink_checkout_url, '_blank');
+          break;
+        default:
+          console.log('tes')
+          window.open(result.action.desktop_web_checkout_url, '_blank');
+          break;
+      }
+    } catch (error) {
+      console.log(error, 'onSubmit DetailTransaction Error')
+      setLoading(0)
+    }
+  }
+
+  const onStatusRenew = async () => {
+    try {
+      setLoading(1)
+      const { data: { data: result } } = await TransactionAction.fetchById(paymentDetail?._id, token)
+      
+      setPaymentDetail(result)
+      setLoading(0)
+    } catch (error) {
+      console.log(error, 'onStatusRenew')
+    }
+  }
+
   return (
-    <div className={ Styles.Container }>
+    <form onSubmit={ onSubmit } className={ Styles.Container }>
       <div className={ Styles.Card }>
         <div className={ Styles.Title }>
           <span>Pengisian Data Diri</span>
@@ -122,8 +219,10 @@ export default function DetailTransaction() {
             <MenuItem value={'berdua'}>Berdua</MenuItem>
           </Select> */}
           <CssTextField 
-            value={buyPackage}
-            onChange={(e) => setBuyPackage(e.target.value)}
+            value={data.type}
+            onChange={ onChangeData }
+            name="type"
+            required
             select
             >
             <MenuItem value={'sendiri'}>1 Orang</MenuItem>
@@ -131,20 +230,24 @@ export default function DetailTransaction() {
           </CssTextField>
         </div>
         <div className={ Styles.Control }>
-          <CssTextField disabled label="Alamat email anda" fullWidth/>
+          <CssTextField required value={ data.email } onChange={ onChangeData } name="email" disabled label="Alamat email anda" fullWidth/>
         </div>
         <div className={ Styles.Control }>
-          <CssTextField label="Nama" fullWidth/>
+          <CssTextField required value={ data.participant } onChange={ onChangeData } name="participant" label="Nama" fullWidth/>
         </div>
         <div className={ Styles.Control }>
-          <CssTextField label="Nomor HP Anda" fullWidth/>
+          <CssTextField required value={ data.phoneNumber } onChange={ onChangeData } name="phoneNumber" InputProps={ 
+            { startAdornment: <InputAdornment position='start'>+62</InputAdornment> }
+          } label="Nomor HP Anda" fullWidth/>
         </div>
-        <div className={ `${ Styles.Companion } ${ buyPackage === 'sendiri' && Styles.Disabled }` }>
+        <div className={ `${ Styles.Companion } ${ data.type === 'sendiri' && Styles.Disabled }` }>
           <div className={ Styles.Control }>
-            <CssTextField label="Nama Peserta 2" fullWidth/>
+            <CssTextField required={ data.type === 'berdua' } value={ data.second_participant } onChange={ onChangeData } name="second_participant" label="Nama Peserta 2" fullWidth/>
           </div>
           <div className={ Styles.Control }>
-            <CssTextField label="Nomor HP Peserta 2" fullWidth/>
+            <CssTextField required={ data.type === 'berdua' } value={ data.second_participant_phoneNumber } onChange={ onChangeData } name="second_participant_phoneNumber" label="Nomor HP Peserta 2" InputProps={ 
+              { startAdornment: <InputAdornment position='start'>+62</InputAdornment> }
+            } fullWidth/>
           </div>
         </div>
       </div>
@@ -159,52 +262,63 @@ export default function DetailTransaction() {
               <KeyboardArrowDown sx={ { color: '#FFF' } } className={ Styles.Arrow }/>
             </Button>
             <div className={ `${ Styles.Methods } ${ Boolean(showMethods) && Styles.Active }` }>
-              <Button disableRipple onClick={ () => setPaymentMethod('qris') } disabled={ paymentMethod === 'qris' } className={ paymentMethod === 'qris' ? Styles.Selected : '' }>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'ID_LINKAJA' })) } disabled={ data.paymentMethod === 'ID_LINKAJA' } className={ data.paymentMethod === 'ID_LINKAJA' ? Styles.Selected : '' }>
                 <div>
-                  <img src={ QRIS_TRANSACTION_LOGO } alt="QRIS_TRANSACTION_LOGO" />
+                  <img src={ LINKAJA_TRANSACTION_LOGO } alt="LINKAJA_TRANSACTION_LOGO" />
                 </div>
                 <div>
-                  <span>QRIS</span>
+                  <span>Link Aja</span>
                 </div>
                 <div className={ Styles.Radio }>
-                  <Radio checked={ paymentMethod === 'qris' }/>
+                  <Radio checked={ data.paymentMethod === 'ID_LINKAJA' }/>
                 </div>
               </Button>
-              <Button disableRipple onClick={ () => setPaymentMethod('bca') } disabled={ paymentMethod === 'bca' } className={ paymentMethod === 'bca' ? Styles.Selected : '' }>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'ID_DANA' })) } disabled={ data.paymentMethod === 'ID_DANA' } className={ data.paymentMethod === 'ID_DANA' ? Styles.Selected : '' }>
                 <div>
-                  <img src={ BCA_TRANSACTION_LOGO } alt="BCA_TRANSACTION_LOGO" />
+                  <img src={ DANA_TRANSACTION_LOGO } alt="DANA_TRANSACTION_LOGO" />
                 </div>
                 <div>
-                  <span>BCA Virtual Account</span>
+                  <span>DANA</span>
                 </div>
                 <div className={ Styles.Radio }>
-                  <Radio checked={ paymentMethod === 'bca' }/>
+                  <Radio checked={ data.paymentMethod === 'ID_DANA' }/>
                 </div>
               </Button>
-              <Button disableRipple onClick={ () => setPaymentMethod('mandiri') } disabled={ paymentMethod === 'mandiri' } className={ paymentMethod === 'mandiri' ? Styles.Selected : '' }>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'ID_OVO' })) } disabled={ data.paymentMethod === 'ID_OVO' } className={ data.paymentMethod === 'ID_OVO' ? Styles.Selected : '' }>
                 <div>
-                  <img src={ MANDIRI_TRANSACTION_LOGO } alt="MANDIRI_TRANSACTION_LOGO" />
+                  <img src={ OVO_TRANSACTION_LOGO } alt="OVO_TRANSACTION_LOGO" />
                 </div>
                 <div>
-                  <span>Mandiri Virtual Account</span>
+                  <span>OVO</span>
                 </div>
                 <div className={ Styles.Radio }>
-                  <Radio checked={ paymentMethod === 'mandiri' }/>
+                  <Radio checked={ data.paymentMethod === 'ID_OVO' }/>
+                </div>
+              </Button>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'ID_SHOPEEPAY' })) } disabled={ data.paymentMethod === 'ID_SHOPEEPAY' } className={ data.paymentMethod === 'ID_SHOPEEPAY' ? Styles.Selected : '' }>
+                <div>
+                  <img style={ { width: '90%', height: 'auto', transform: 'translateY(-35px)' } } src={ SHOPEEPAY_TRANSACTION_LOGO } alt="SHOPEEPAY_TRANSACTION_LOGO" />
+                </div>
+                <div>
+                  <span>Shopeepay</span>
+                </div>
+                <div className={ Styles.Radio }>
+                  <Radio checked={ data.paymentMethod === 'ID_SHOPEEPAY' }/>
                 </div>
               </Button>
             </div>
           </div>
           <div className={ Styles.Total }>
             <span>Sub Total</span>
-            <span>Rp 50.000</span>
+            { !Boolean(loading) && Boolean(data.price) ? (
+              <span>{ onRupiah(data.price) }</span>
+              // <Skeleton variant="text"/>
+            ) : (
+              <Skeleton variant="text"/>
+            ) }
           </div>
           <div className={ Styles.Next }>
-            <Button onClick={ () => setPaymentDetail({
-              id: '12345',
-              status: 'Belum dibayar',
-              metode: 'mandiri',
-              bayar: '12314112412412121'
-            }) }>Lanjut Pembayaran</Button>
+            <Button type="submit" disabled={ Boolean(loading) }>{ Boolean(loading) ? <CircularProgress size={ 30 } sx={ { color: '#FFF' } }/> : 'Bayar' }</Button>
           </div>
         </div>
       </div>
@@ -216,10 +330,10 @@ export default function DetailTransaction() {
           <div className={ Styles.Control }>
             <label>Status Pembayaran</label>
             <div>
-              <span>Belum dibayar</span>
+              <span>{ paymentDetail?.paymentStatus }</span>
             </div>
           </div>
-          <Button>{ 1 + 1 === 2 ? 'Perbarui Status' : <CircularProgress sx={{ color: '#3A9697' }} size={ 20 }/> }</Button>
+          <Button onClick={ () => onStatusRenew() }>{ Boolean(!loading) ? 'Perbarui Status' : <CircularProgress sx={{ color: '#3A9697' }} size={ 20 }/> }</Button>
         </div>
         <div className={ Styles.Control }>
           <TransactionTypeCallback/>
@@ -227,9 +341,9 @@ export default function DetailTransaction() {
         <TransactionCallback/>
         <div className={ Styles.Interact }>
           <div className={ Styles.Control }>
-            <label>Total Nominal Transfer</label>
+            <label>Total Nominal</label>
             <div>
-              <span>Rp 50.000</span>
+            <span>{ paymentDetail ? onRupiah(paymentDetail?.totalPrice) : '' }</span>
             </div>
           </div>
           {/* <Button className={ Styles.Copy }>Salin</Button> */}
@@ -241,6 +355,6 @@ export default function DetailTransaction() {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   )
 }

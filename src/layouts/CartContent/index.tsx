@@ -12,7 +12,7 @@ export default function CartContent() {
       type: 'SET_CART_READ',
       payload: true
     })
-  }, [read])
+  }, [])
 
   return (
     <div className={ Styles.Container }>

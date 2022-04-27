@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { IconButton } from '@mui/material'
-import { QUOTE_LEFT_IMAGE } from '../../assets/png'
+import { DEFAULT_PROFILE_PICTURE, QUOTE_LEFT_IMAGE } from '../../assets/png'
 import { ICardProps, IContainerProps } from './index.interface'
 import Styles from './styles.module.scss'
 import { ChevronRight, ChevronLeft } from '@mui/icons-material'
@@ -11,10 +11,10 @@ const Card = (props: ICardProps) => {
   return (
     <div className={ Styles.Testimony }>
       <div className={ Styles.Quote }>
-        <img src={ QUOTE_LEFT_IMAGE} alt="QUOTE_LEFT_IMAGE" />
+        <img src={ QUOTE_LEFT_IMAGE } alt="QUOTE_LEFT_IMAGE" />
       </div>
       <div className={ Styles.User }>
-        <div className={ Styles.Img } />
+        <img src={ DEFAULT_PROFILE_PICTURE } className={ Styles.Img } />
         <div>
           <span>Jerry Doe</span>
           <span>Web development training</span>
@@ -81,18 +81,18 @@ export default function Container(props: IContainerProps) {
       <div className={ `${ Styles.Movable } ${ Styles.Triple }` } style={ { width: `calc(${ memoizedData().length }*100vw)`, gridTemplateColumns: `repeat(${ memoizedData().length }, 1fr)`, transform: `translateX(-${ page }vw)` } }>
         { memoizedData().map((multi: any, index: number) => (
           <div key={ index }>
-            { multi.map((el: any, key: number) => (
+            { multi.map((el: any, key: number) => el ? (
               <Card data={ el } key={ key }/>
-            )) }
+            ) : <div key={ key }/>) }
           </div>
         )) }
       </div>
       <div className={ `${ Styles.Movable } ${ Styles.Double }` } style={ { width: `calc(${ memoizedData(2).length }*100vw)`, gridTemplateColumns: `repeat(${ memoizedData(2).length }, 1fr)`, transform: `translateX(-${ page }vw)` } }>
         { memoizedData(2).map((multi: any, index: number) => (
           <div key={ index }>
-            { multi.map((el: any, key: number) => (
+            { multi.map((el: any, key: number) => el ? (
               <Card data={ el } key={ key }/>
-            )) }
+            ) : <div key={ key }/>) }
           </div>
         )) }
       </div>

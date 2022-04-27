@@ -24,6 +24,7 @@ export interface iEditProps {
   hasLiveZoom?: boolean
   hasGroup?: boolean
   timeDescription?: string
+  status?: 'active' | 'inactive'
 }
 
 interface iPriceProps {

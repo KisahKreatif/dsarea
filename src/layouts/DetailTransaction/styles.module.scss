@@ -59,6 +59,10 @@
       width: 70px;
     }
   }
+
+  span {
+    text-transform: capitalize;
+  }
 }
 
 .Control {
@@ -151,7 +155,7 @@
       transition: 0.2s;
       &.Active {
         opacity: 1;
-        height: 160px;
+        height: 210px;
       }
       button {
         width: 100%;
@@ -174,7 +178,9 @@
             margin-right: 10px;
             img {
               height: 90%;
+              object-fit: contain;
               width: auto;
+              pointer-events: none;
             }
           }
           &.Radio {
@@ -212,6 +218,7 @@
     align-items: center;
     padding-block: 20px;
     span {
+      min-width: 100px;
       &:first-child {
         color: #727272;
         font-size: 14px;
@@ -238,6 +245,7 @@
       font-weight: 600;
       font-family: 'Poppins', sans-serif;
       text-transform: capitalize;
+      min-width: 120px;
       padding-inline: 15px;
     }
   }

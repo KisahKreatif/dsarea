@@ -19,9 +19,9 @@ export default function FooterComponent(props: any) {
         <div className={ Styles.FooterPaddingInline }>
           <div className={ Styles.FooterBottomControl }>
             <span className={ Styles.FooterBottomTitle }>Kontak Kami</span>
-            <span className={ Styles.FooterBottomSpan }>admin@digitalskillsarea.com</span>
-            <span className={ Styles.FooterBottomSpan }>+62 81263997599</span>
-            <span className={ Styles.FooterBottomSpan }>Jl. R.A Kartini  No.10, Kebayoran Lama, Jakarta Selatan</span>
+            
+            <span className={ Styles.FooterBottomSpan }>+62 85158524451</span>
+            <span className={ Styles.FooterBottomSpan }>GEDUNG STC SENAYAN, Jalan Asia Afrika, Lantai 2 Ruang 89, JAKARTA PUSAT, DKI JAKARTA 10270, ID</span>
           </div>
           <div className={ Styles.FooterBottomControl }>
             <span className={ Styles.FooterBottomTitle }>Navigasi</span>

@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { CartPage, MainPage, TrainingPage, DetailPage, ProfilePage, PelatihankuPage, KeranjangkuPage, RiwayatkuPage, CaraPembelianPage, KeranjangkuMainPage, RiwayatkuMainPage, KeranjangkuDetailPage, RiwayatkuDetailPage, SuperPage, SuperDashboard, SuperTrainingPage, SuperReviewPage, SuperTrainingMainPage, SuperTrainingInputPage, SuperReviewMainPage, SuperReviewInputPage } from './pages';
 import { createTheme, ThemeProvider } from '@mui/material';
 import UserAction from './store/reducers/user/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import ReviewAction from './store/reducers/review/actions';
 
 const muiTheme = createTheme({
   typography: {
@@ -23,13 +24,14 @@ export const AuthContext = createContext({
 function App() {
   const [token, setToken]: [string, ISetState] = useState('')
   const dispatch = useDispatch()
+  const { profile } = useSelector(({ user }: any) => user)
   const isSuper = useMemo(() => {
+    if (profile?.role === 'admin') return true
     return false
-  }, [])
+  }, [profile])
   
   useEffect(() => {
     let token = localStorage.getItem('token')
-    console.log(token)
     if (token) {
       dispatch(UserAction.login(token))
       setToken(token)
@@ -78,7 +80,13 @@ function App() {
 
 const AppRoutes = (props: iAppProps) => {
   const { isSuper, token } = props
+  const dispatch = useDispatch()
   const location = useLocation()
+
+  useEffect(() => {
+    dispatch(ReviewAction.fetch())
+  }, [])
+
   useEffect(() => {
     window.scrollTo({ top: 0 })
   }, [location])

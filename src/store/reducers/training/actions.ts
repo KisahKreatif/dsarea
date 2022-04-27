@@ -14,6 +14,24 @@ export default class TrainingAction {
       })
       dispatch({
         type: 'SET_CLASSES',
+        payload: data.sort((a: any, b: any) => b.updatedAt - a.updatedAt)
+      })
+    } catch (error) {
+      console.log(error, 'TrainingAction.fetch error')
+    }
+  }
+
+  static fetchPrivate = (token: string) => async (dispatch: any, getState: any) => {
+    try {
+      const { data: { data } } = await axios({
+        method: 'GET',
+        url: '/auth/myclass',
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      dispatch({
+        type: 'SET_PRIVATE_CLASSES',
         payload: data
       })
     } catch (error) {
@@ -65,6 +83,7 @@ export default class TrainingAction {
         },
         data: payload
       })
+      console.log(data, 'data')
       dispatch({
         type: 'SET_CLASSES',
         payload: [...classes, data]

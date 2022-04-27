@@ -1,12 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
 import { HeaderComponent, ProfileSidebarComponent } from '../../components'
+import TrainingAction from '../../store/reducers/training/actions'
 import Styles from './styles.module.scss'
 
 export default function ProfilePage() {
   const [sideBar, setSideBar] = useState(0)
+  const token: any = useMemo(() => {
+    const access_token = localStorage.getItem('token')
+    return access_token
+  }, [])
   const location = useLocation()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(TrainingAction.fetchPrivate(token))
+  }, [])
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

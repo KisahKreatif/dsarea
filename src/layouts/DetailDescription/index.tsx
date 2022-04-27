@@ -69,13 +69,10 @@ export default function DetailDescription(props: any) {
           <Button onClick={ () => setContent('description') } disabled={ content === 'description' } className={ content === 'description' ? Styles.Active : '' }>Deskripsi</Button>
           <Button onClick={ () => setContent('info') } disabled={ content === 'info' } className={ content === 'info' ? Styles.Active : '' }>Info Training</Button>
         </div>
+        { data ? (
         <div className={ `${ Styles.Description } ${ content === 'description' && Styles.Active }` }>
           <div className={ Styles.Main }>
-            { data ? (
-              <span>{ data.description }</span>
-            ) : (
-              <Skeleton variant='text' height={ 60 }/>
-            ) }
+            <span>{ data.description }</span>
           </div>
           <div className={ Styles.Details }>
             { memoizedLearningMaterial.map((col: any, ind: number) => (
@@ -86,22 +83,25 @@ export default function DetailDescription(props: any) {
             </ul>
             )) }
           </div>
-          { data ? (
-            <div className={ `${ Styles.Benefits } ${ !data?.benefit || data?.benefit.length <= 0 && Styles.None }` }>
-              <span>Benefit:</span>
-              <ul>
-                <li>Akses materi selamanya + bonus materi</li>
-                <li>Video pembahasan materi</li>
-                <li>Soal latihan</li>
-                <li>Grup bimbingan</li>
-                <li>Channel lowongan kerja</li>
-                <li>e-Certificate</li>
-              </ul>
-            </div>
-          ) : (
-            <Skeleton variant='text' height={ 150 }/>
-          ) }
+          <div className={ `${ Styles.Benefits } ${ !data?.benefit || data?.benefit.length <= 0 && Styles.None }` }>
+            <span>Benefit:</span>
+            <ul>
+              <li>Akses materi selamanya + bonus materi</li>
+              <li>Video pembahasan materi</li>
+              <li>Soal latihan</li>
+              <li>Grup bimbingan</li>
+              <li>Channel lowongan kerja</li>
+              <li>e-Certificate</li>
+            </ul>
+          </div>
         </div>
+        ) : (
+          content === 'description' ? (
+            <Skeleton variant='text' height={ 300 }/>
+          ) : (
+            null
+          )
+        ) }
         <div className={ `${ Styles.Info } ${ content === 'info' && Styles.Active }` }>
           { data ? (
             <span>Waktu:</span>

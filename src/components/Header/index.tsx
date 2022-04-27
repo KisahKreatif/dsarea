@@ -1,17 +1,18 @@
 import { Button, IconButton } from '@mui/material'
 import { useCallback, useContext, useEffect, useMemo } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { DEFAULT_PROFILE_PICTURE, DSAREA_LOGO } from '../../assets/png'
 import { SearchSVG, ShoppingCartSVG } from '../../assets/svg'
 import Styles from './styles.module.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AuthContext } from '../../App'
 import { iHeaderProps } from './index.interface'
-import { Dehaze, DensityMedium } from '@mui/icons-material'
+import { DensityMedium } from '@mui/icons-material'
 
 export default function HeaderComponent(props: iHeaderProps) {
   const { sideBar, setSideBar, onChangeHome, homePosition } = props
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const location = useLocation()
   const { isSuper } = useContext(AuthContext)
   const { profile } = useSelector(({ user }: any) => user)
@@ -44,8 +45,12 @@ export default function HeaderComponent(props: iHeaderProps) {
   }
 
   const onClickLink = (state: 'home' | 'online-training' | 'jasa' | 'tanya-kami') => {
-    if (onChangeHome)
-      onChangeHome(state)
+    if (location.pathname === '/') {
+      if (onChangeHome)
+        onChangeHome(state)
+    } else {
+      navigate('/', { state })
+    }
   }
 
   const MemoizedSearch = useCallback(() => {

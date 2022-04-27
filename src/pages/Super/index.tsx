@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../App'
 import { HeaderComponent, SuperSidebarComponent } from '../../components'
-import ReviewAction from '../../store/reducers/review/actions'
 import TrainingAction from '../../store/reducers/training/actions'
 import Styles from './styles.module.scss'
 
@@ -17,7 +16,6 @@ export default function SuperPage() {
 
   useEffect(() => {
     dispatch(TrainingAction.fetch(token))
-    dispatch(ReviewAction.fetch())
     // eslint-disable-next-line
   }, [])
 

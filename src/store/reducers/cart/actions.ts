@@ -32,10 +32,13 @@ export default class CartAction {
           _id: id
         }
       })
-      console.log([...cart, classes.find((el: any) => el._id === id)])
       dispatch({
         type: 'SET_CART',
         payload: [...cart, classes.find((el: any) => el._id === id)]
+      })
+      dispatch({
+        type: 'SET_CART_READ',
+        payload: false
       })
     } catch (error) {
       console.log(error, 'CartAction.add error')

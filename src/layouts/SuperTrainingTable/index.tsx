@@ -1,8 +1,8 @@
-import { debounce, IconButton } from '@mui/material'
+import { debounce, FormControlLabel, IconButton, Switch } from '@mui/material'
 import { Console } from 'console'
 import moment from 'moment'
 import React, { useEffect, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { BUTTON_EDIT_ICON, OFFICE_EXCEL_LOGO } from '../../assets/png'
 import { MuiCheckbox } from '../../components'
@@ -10,15 +10,79 @@ import onRupiah from '../../helpers/onRupiah'
 import { iTrainingTableProps } from './index.interface'
 import Styles from './styles.module.scss'
 import 'moment/locale/id'
+import TrainingAction from '../../store/reducers/training/actions'
+
+function SuperTableRow(props: any) {
+  const { data, checked, setChecked, onEdit } = props
+  const token = useMemo(() => {
+    const access_token = localStorage.getItem('token')
+
+    return access_token
+  }, [])
+  const dispatch = useDispatch()
+  const [status, setStatus]: [number, Function] = useState(0)
+
+  useEffect(() => {
+    setStatus(data.status === 'active' ? 1 : 0)
+  }, [])
+
+  useEffect(() => {
+    if (token)
+      dispatch(TrainingAction.edit({ status: Boolean(status) ? 'active' : 'inactive' }, data._id, token))
+  }, [status])
+
+  return (
+    <tr>
+      <td>
+        <MuiCheckbox onClick={ () => setChecked((prev: string[]) => prev.includes(data._id) ? (prev.filter((each: string) => each !== data._id)) : ([...prev, data._id])) } checked={ checked.includes(data._id) } sx={ { '& .MuiSvgIcon-root': { fontSize: 28 } } }/>
+      </td>
+      <td>
+        <div className={ Styles.Control }>
+          <img src={ data.icon } alt="LOGO" />
+          <div>
+            <span>{ data.title }</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div className={ Styles.Prices }>
+          <span>{ onRupiah(data.price.regular) }/Orang</span>
+          <span>{ onRupiah(data.price.special) }/2 Orang</span>
+        </div>
+      </td>
+      <td>
+        <div>
+          <span>{ moment(data.updatedAt).format('LL') }</span>
+        </div>
+      </td>
+      <td>
+        <div>
+          <div>
+            <span>{ data.totalPembelian }</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <FormControlLabel control={ <Switch checked={ Boolean(status) } onClick={ () => setStatus((prev: any) => !Boolean(prev)) }/> } label={ Boolean(status) ? 'Active' : 'Inactive' }/>
+        </div>
+      </td>
+      <td>
+        <div className={ Styles.Action }>
+          <IconButton onClick={ () => onEdit(data) }>
+            <img src={ BUTTON_EDIT_ICON } alt="BUTTON_EDIT_ICON" />
+          </IconButton>
+        </div>
+      </td>
+    </tr>
+  )
+}
 
 export default function SuperTrainingTableLayout(props: iTrainingTableProps) {
   const { checked, setChecked, searchFilter } = props
   const navigate = useNavigate()
   const { classes } = useSelector(({ training }: any) => training)
   const [filteredClasses, setFilteredClasses] = useState([])
-  // const filteredClasses = useMemo(() => {
-  //   return debounce(classes.filter((el: any) => el.title.toLowerCase().includes(searchFilter?.toLowerCase())), 100)
-  // }, [classes, searchFilter])
 
   useEffect(() => {
     if (filteredClasses.length === 0)
@@ -65,49 +129,13 @@ export default function SuperTrainingTableLayout(props: iTrainingTableProps) {
             <th>Harga</th>
             <th>Update Terakhir</th>
             <th>Total Pembelian</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          { filteredClasses.sort((a: any, b: any) => b.updatedAt - a.updatedAt).map((el: any, key: number) => (
-            <tr key={ key }>
-              <td>
-                <MuiCheckbox onClick={ () => setChecked((prev: string[]) => prev.includes(el._id) ? (prev.filter((each: string) => each !== el._id)) : ([...prev, el._id])) } checked={ checked.includes(el._id) } sx={ { '& .MuiSvgIcon-root': { fontSize: 28 } } }/>
-              </td>
-              <td>
-                <div className={ Styles.Control }>
-                  <img src={ el.icon } alt="LOGO" />
-                  <div>
-                    <span>{ el.title }</span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div className={ Styles.Prices }>
-                  <span>{ onRupiah(el.price.regular) }/Orang</span>
-                  <span>{ onRupiah(el.price.special) }/2 Orang</span>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <span>{ moment(el.updatedAt).format('LL') }</span>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <div>
-                    <span>{ el.totalPembelian }</span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div className={ Styles.Action }>
-                  <IconButton onClick={ () => onEdit(el) }>
-                    <img src={ BUTTON_EDIT_ICON } alt="BUTTON_EDIT_ICON" />
-                  </IconButton>
-                </div>
-              </td>
-            </tr>
+          { filteredClasses.map((el: any, key: number) => (
+            <SuperTableRow key={ key } data={ el } onEdit={ onEdit } checked={ checked } setChecked={ setChecked }/>
           )) }
 
         </tbody>

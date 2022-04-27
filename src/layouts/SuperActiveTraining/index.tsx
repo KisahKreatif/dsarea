@@ -33,7 +33,7 @@ export default function SuperActiveTrainingLayout() {
         <Link to="/super/kelas">Lihat lainnya</Link>
       </div>
       <div className={ Styles.Body }>
-        { classes.slice(0, 4).map((el: any) => (
+        { classes.filter((el: any) => el.status === 'active').slice(0, 4).sort((a: any, b: any) => b.updatedAt - a.updatedAt).map((el: any) => (
         <div key={ el._id } className={ Styles.Each }>
           <div className={ Styles.Name }>
             <span>{ el.title }</span>
