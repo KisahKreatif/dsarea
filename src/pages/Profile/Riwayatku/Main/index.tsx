@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { debounce } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { TrainingCardComponent } from '../../../../components'
 import { ProfileTitleLayout } from '../../../../layouts'
@@ -8,13 +9,28 @@ export default function IndexPage () {
   const [search, setSearch]: [string, Function] = useState('')
 
   const { privateClasses } = useSelector(({ training }: any) => training)
+  const [filteredClasses, setFilteredClasses] = useState([])
+
+  useEffect(() => {
+    let mount = true
+    if (mount) {
+      setFilteredClasses(privateClasses)
+    }
+    return () => {
+      mount = false
+    }
+  }, [privateClasses])
+
+  useEffect(() => {
+    debounce(() => setFilteredClasses((prev: any) => prev.filter((el: any) => el.title.toLowerCase().includes(search?.toLowerCase()))), 500)()
+  }, [search])
 
   return (
     <div className={ Styles.Container }>
-      <ProfileTitleLayout title="Daftar Riwayat Pelatihan" searchValue={ search } searchOnChange={ setSearch }/>
+      <ProfileTitleLayout title="Daftar Riwayat Pelatihan" searchValue={ search } searchOnChange={ (e: any) => setSearch(e.target.value) }/>
 
       <div className={ Styles.Conditioner }>
-        { privateClasses.filter((el: any) => el.status === 'inactive').map((el: number, key: number) => (
+        { filteredClasses.filter((el: any) => el.status === 'inactive').map((el: number, key: number) => (
           <TrainingCardComponent type="history" data={ el } key={ key }/>
         ))  }
       </div>

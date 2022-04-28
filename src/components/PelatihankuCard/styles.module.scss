@@ -135,6 +135,7 @@
             font-size: 12px;
             font-weight: 500;
             color: #0E4647;
+            text-transform: capitalize;
             @media (max-width: 1350px) {
               font-size: calc(12px*4/5);
             }

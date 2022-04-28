@@ -1,23 +1,10 @@
-import React, { useContext, useEffect, useMemo } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { AuthContext } from '../../App'
 import { HeaderComponent, SuperSidebarComponent } from '../../components'
-import TrainingAction from '../../store/reducers/training/actions'
 import Styles from './styles.module.scss'
 
 export default function SuperPage() {
   const location = useLocation()
-  const dispatch = useDispatch()
-  const token = useMemo(() => {
-    const access_token = localStorage.getItem('token')
-    return access_token
-  }, [])
-
-  useEffect(() => {
-    dispatch(TrainingAction.fetch(token))
-    // eslint-disable-next-line
-  }, [])
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

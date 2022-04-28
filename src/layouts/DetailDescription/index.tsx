@@ -36,7 +36,7 @@ export default function DetailDescription(props: any) {
       <div className={ Styles.Card }>
         <div className={ Styles.Image }>
           { data ? (
-            <img src={ OFFICE_WORD_LOGO } alt="CLASS_LOGO" />
+            <img src={ data.icon } alt="CLASS_LOGO" />
           ) : (
             <Skeleton height={ 130 } width={ 130 } variant='rectangular'/>
           ) }

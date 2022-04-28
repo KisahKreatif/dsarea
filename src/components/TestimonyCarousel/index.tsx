@@ -7,7 +7,7 @@ import { ChevronRight, ChevronLeft } from '@mui/icons-material'
 import { Star as StarIcon } from '@mui/icons-material'
 
 const Card = (props: ICardProps) => {
-  // const { data } = props
+  const { data } = props
   return (
     <div className={ Styles.Testimony }>
       <div className={ Styles.Quote }>
@@ -16,18 +16,18 @@ const Card = (props: ICardProps) => {
       <div className={ Styles.User }>
         <img src={ DEFAULT_PROFILE_PICTURE } className={ Styles.Img } />
         <div>
-          <span>Jerry Doe</span>
-          <span>Web development training</span>
+          <span>{ data.name }</span>
+          <span>Learner</span>
         </div>
       </div>
       <div className={ Styles.Opinion }>
-        <span>Dari awal mengenal Ditital Skills Area saya tertarik karena memiliki tenaga profesional di bidangnya, dan hasil nya saya memahami materi yang di berikan oleh pengejar. Saya sangat puas bisa mengikuti pelatihan disini.</span>
+        <span>{ data.notes }</span>
       </div>
       <div>
         <div className={ Styles.Rating }>
           <StarIcon sx={ { color: '#FDCC0D', fontSize: 20 } }/>
         </div>
-        <span>4.0/5.0</span>
+        <span>{ data.rating }.0/5.0</span>
       </div>
     </div>
   )

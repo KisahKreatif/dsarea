@@ -9,19 +9,87 @@
   }
 }
 
-.Title {
-  width: 100%;
-  padding-top: 40px;
-  padding-inline: 30px;
-  
-  & > span {
-    font-weight: 600;
-    font-size: 36px;
-  }
-}
-
 .Conditioner {
   padding-left: 30px;
   padding-right: 70px;
   width: 100%;
+  margin-top: -20px;
+  padding-bottom: 50px;
+}
+
+.Desc {
+  span {
+    font-size: 16px;
+
+  }
+}
+
+.Control {
+  display: grid;
+  grid-template-columns: 45px 1fr;
+  column-gap: 20px;
+  margin-top: 35px;
+
+  .Number {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50px;
+    background-color: #5CC9CD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+    }
+  }
+
+  & > div:not(.Number) {
+    padding-top: 10px;
+    & > div {
+      margin-bottom: 10px;
+    }
+    .Title {
+      span {
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+    .Instruction {
+      & > span {
+        font-size: 14px;
+        & > span {
+          font-weight: 600;
+        }
+      }
+    }
+    .Images {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      img {
+        object-fit: contain;
+        margin-right: 20px;
+      }
+      .ScreenShot11 {
+        width: 500px;
+      }
+      .ScreenShot12 {
+        width: 400px;
+      }
+      .ScreenShot23 {
+        width: 450px;
+      }
+      .ScreenShot24 {
+        width: 360px;
+      }
+      .ScreenShot25 {
+        width: 330px;
+      }
+      .ScreenShot31 {
+        height: 330px;
+      }
+    }
+  }
 }

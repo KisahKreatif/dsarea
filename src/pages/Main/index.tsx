@@ -26,8 +26,6 @@ export default function MainPage() {
   const askRef: any = useRef(null)
   const location = useLocation()
   useEffect(() => {
-    dispatch(TrainingAction.fetch(isSuper ? token : undefined ))
-
     window.addEventListener('scroll', debounce((event) => {
       setScrollPosition(window.scrollY)
     }, 100))

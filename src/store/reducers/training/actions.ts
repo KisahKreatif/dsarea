@@ -83,7 +83,6 @@ export default class TrainingAction {
         },
         data: payload
       })
-      console.log(data, 'data')
       dispatch({
         type: 'SET_CLASSES',
         payload: [...classes, data]

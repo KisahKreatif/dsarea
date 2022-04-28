@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import UserAction from './store/reducers/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviewAction from './store/reducers/review/actions';
+import TrainingAction from './store/reducers/training/actions';
 
 const muiTheme = createTheme({
   typography: {
@@ -85,6 +86,7 @@ const AppRoutes = (props: iAppProps) => {
 
   useEffect(() => {
     dispatch(ReviewAction.fetch())
+    dispatch(TrainingAction.fetch(token))
   }, [])
 
   useEffect(() => {

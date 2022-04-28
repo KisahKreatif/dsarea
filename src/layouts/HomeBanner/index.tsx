@@ -8,7 +8,7 @@ export default function HomeBanner() {
   return (
     <div className={ Styles.Container }>
       <div className={ Styles.Content }>
-        <span className={ Styles.Title }>Upgrade Skill Anda dan Temukan Peluang Karir Bersama <span>DigitalSkillsArea</span></span>
+        <span className={ Styles.Title }>Upgrade Skill Anda dan Temukan Peluang Karir Bersama <span>Digitalskillsarea</span></span>
         <span className={ Styles.Info }>Awali karirmu dengan bergabung bersama ribuan peserta Digitalskillsarea!</span>
         <Button onClick={ () => navigate('pelatihan') } variant='contained'>Explore Sekarang</Button>
       </div>

@@ -85,10 +85,12 @@ export default function SuperTrainingTableLayout(props: iTrainingTableProps) {
   const [filteredClasses, setFilteredClasses] = useState([])
 
   useEffect(() => {
-    if (filteredClasses.length === 0)
-      setFilteredClasses(classes)
-    debounce(() => setFilteredClasses(classes.filter((el: any) => el.title.toLowerCase().includes(searchFilter?.toLowerCase()))), 500)()
-  }, [classes, searchFilter])
+    setFilteredClasses(classes)
+  }, [classes])
+
+  useEffect(() => {
+    debounce(() => setFilteredClasses((prev: any) => prev.filter((el: any) => el.title.toLowerCase().includes(searchFilter?.toLowerCase()))), 500)()
+  }, [searchFilter])
 
   const isAllChecked = useMemo(() => {
     if (classes.length > 0 && classes.length > 0) {

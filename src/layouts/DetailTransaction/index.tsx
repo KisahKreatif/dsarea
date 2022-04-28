@@ -1,5 +1,5 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
-import { Button, CircularProgress, InputAdornment, MenuItem, Modal, Radio, Skeleton, styled, TextField, Typography } from '@mui/material'
+import { Button, CircularProgress, InputAdornment, MenuItem, Radio, Skeleton, styled, TextField } from '@mui/material'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { BCA_TRANSACTION_LOGO, DANA_TRANSACTION_LOGO, LINKAJA_TRANSACTION_LOGO, MANDIRI_TRANSACTION_LOGO, OVO_TRANSACTION_LOGO, QRIS_TRANSACTION_LOGO, SHOPEEPAY_TRANSACTION_LOGO } from '../../assets/png';
 import Styles from './styles.module.scss'
@@ -180,7 +180,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
           window.open(result.action.mobile_deeplink_checkout_url, '_blank');
           break;
         default:
-          console.log('tes')
           window.open(result.action.desktop_web_checkout_url, '_blank');
           break;
       }
@@ -312,7 +311,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
             <span>Sub Total</span>
             { !Boolean(loading) && Boolean(data.price) ? (
               <span>{ onRupiah(data.price) }</span>
-              // <Skeleton variant="text"/>
             ) : (
               <Skeleton variant="text"/>
             ) }

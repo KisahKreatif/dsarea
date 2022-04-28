@@ -69,7 +69,6 @@ export default class ReviewAction {
         },
         data: payload
       })
-      console.log(data, 'dataaa')
       dispatch({
         type: 'SET_REVIEWS',
         payload: testimonies.map((el: any) => el._id === id ? data : el)
