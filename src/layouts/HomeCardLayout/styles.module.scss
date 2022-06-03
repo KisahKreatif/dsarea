@@ -1,0 +1,211 @@
+.Container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+
+  .Main {
+    margin: 30px auto;
+    display: grid;
+    gap: 20px;
+    // background-color: antiquewhite;
+    width: 85%;
+    // grid-template-rows: repeat(2, minmax(150px, min-content));
+    grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-columns: repeat(auto-fit, 100px);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    // grid-auto-rows: 150px;
+    padding-bottom: 150px;
+
+    @media (max-width: 1440px) {
+      margin-inline: 100px;
+    }
+  }
+
+  .CardLeft {
+    padding: 30px;
+    width: 100%;
+    height: 314px;
+    background-color: #ece9e3;
+    border-radius: 15px;
+    display: flex;
+
+    @media (max-width: 680px) {
+      padding: 20px;
+    }
+
+    @media (max-width: 375px) {
+        height: 250px;
+    }
+  }
+  .CardRight {
+    padding: 30px;
+    width: 100%;
+    background-color: #e6e7ea;
+    border-radius: 15px;
+    height: 314px;
+    display: flex;
+
+    @media (max-width: 680px) {
+      padding: 20px;
+    }
+
+    @media (max-width: 500px) {
+        height: 250px;
+      }
+
+    @media (max-width: 375px) {
+        height: 250px;
+    }
+  }
+
+  .Content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+
+    @media (max-width: 768px) {
+      row-gap: 5px;
+    }
+
+    .Button {
+      margin-top: auto;
+    }
+  }
+
+  .Image {
+    flex: 0.5;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 500px) {
+        display: none;
+      }
+
+    @media (max-width: 375px) {
+      display: none;
+    }
+
+    img {
+      width: 188px;
+      height: 180.91px;
+
+      @media (max-width: 1180px) {
+        width: 150px;
+        height: 150.91px;
+      }
+      @media (max-width: 1100px) {
+        width: 120px;
+        height: 120.91px;
+      }
+      @media (max-width: 900px) {
+        width: 100px;
+        height: 100.91px;
+      }
+      @media (max-width: 720px) {
+        width: 80px;
+        height: 80.91px;
+      }
+
+      @media (max-width: 660px) {
+        width: 70px;
+        height: 70.91px;
+      }
+
+      @media (max-width: 620px) {
+        width: 50px;
+        height: 50.91px;
+      }
+
+      @media (max-width: 619px) {
+        width: 180px;
+        height: 180px;
+      }
+
+      @media (max-width: 560px) {
+        width: 140px;
+        height: 140px;
+      }
+
+      @media (max-width: 480px) {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  }
+
+  label {
+    color: #0e4647;
+    font-size: 23px;
+    font-weight: 600;
+
+    @media (max-width: 1300px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 1200px) {
+      font-size: 18px;
+    }
+
+    @media (max-width: 1024px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+  }
+
+  span {
+    color: #0e4647;
+    font-size: 16px;
+    font-weight: 400;
+
+    @media (max-width: 1300px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: 1180px) {
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px) {
+      font-size: 14px;
+    }
+    @media (max-width: 1080px) {
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 11px;
+    }
+
+    @media (max-width: 820px) {
+      font-size: 10px;
+    }
+
+    @media (max-width: 619px) {
+      font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 10px;
+    }
+  }
+
+  button {
+    text-transform: none;
+    width: 193px;
+    height: 50px;
+    background: #3a9699;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #ffffff;
+
+    @media (max-width: 900px) {
+      width: 120px;
+      height: 40px;
+      font-size: 12px;
+    }
+  }
+}

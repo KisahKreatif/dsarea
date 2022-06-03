@@ -8,12 +8,20 @@
   min-height: calc(100vh - 75px);
   width: 100%;
   padding-bottom: 50px;
+
+  @media (max-width: 768px) {
+    padding-top: 40px;
+  }
 }
 
 .Title {
   margin-inline: 70px;
   margin-top: 40px;
   margin-bottom: 20px;
+
+  @media (max-width:425px) {
+    margin-inline: 20px;
+  }
   span {
     font-size: 36px;
     font-weight: 600;
@@ -26,6 +34,15 @@
   width: 100%;
   grid-template-columns: 1fr 530px;
   padding-inline: 60px;
+
+  @media (max-width: 920px) {
+    display: initial;
+  }
+
+  @media (max-width: 768px) {
+    display: initial;
+  }
+
   & > div {
     padding: 10px;
   }

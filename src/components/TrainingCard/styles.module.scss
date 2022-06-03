@@ -3,6 +3,19 @@
   width: 300px !important;
   height: 260px !important;
   padding: 10px !important;
+
+  @media (max-width: 375px) {
+    width: 315px !important;
+  }
+  @media (max-width: 360px) {
+    width: 300px !important;
+  }
+  @media (max-width: 320px) {
+    width: 260px !important;
+  }
+  @media (max-width: 280px) {
+    width: 220px !important;
+  }
   .Head {
     height: 50px !important;
 
@@ -80,6 +93,10 @@
     width: calc(400px*4/6);
     height: calc(380px*4/6);
     padding: 15px;
+  }
+
+  @media (max-width:375px) {
+    margin-inline: 0px;
   }
 
   .Head {

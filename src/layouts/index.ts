@@ -3,6 +3,8 @@ export { default as HomeGeneralAdLayout } from './HomeGeneralAd'
 export { default as HomeTrainingLayout } from './HomeTraining'
 export { default as HomeServiceLayout } from './HomeService'
 export { default as HomeTestimonyLayout } from './HomeTestimony'
+export { default as HomeInfoLayout } from './HomeInfoLayout'
+export { default as HomeCardLayout } from './HomeCardLayout'
 
 export { default as CartContentLayout } from './CartContent'
 
