@@ -15,6 +15,9 @@ $breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px) !default;
   @media (max-width: 700px) {
     padding-block: 20px;
   }
+  @media (max-width: 425px) {
+    padding-left: 20px;
+  }
 }
 
 .Liner {
@@ -33,12 +36,19 @@ $breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px) !default;
   @media (max-width: 700px) {
     display: none;
   }
+  // @media (max-width: 280px) {
+  //   display: none;
+  // }
 
   & > div {
     padding-inline: 20px;
     // width: 150px;
     align-items: center;
     display: flex;
+
+    @media (max-width:425px) {
+      padding-inline: 10px;
+    }
     span {
       font-size: 1vw;
     }
