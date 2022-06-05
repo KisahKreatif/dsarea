@@ -135,8 +135,14 @@
     @media (max-width: 420px) {
       width: 190px;
     }
-    @media (max-width: 320px) {
-      width: 130px;
+    @media (max-width: 360px) {
+      width: 150px;
+    }
+    @media (max-width: 330px) {
+      width: 120px;
+    }
+    @media (max-width: 300px) {
+      width: 100px;
     }
     @media (max-width: 280px) {
       width: 80px;

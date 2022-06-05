@@ -62,6 +62,9 @@
     @media (max-width: 375px) {
         height: 250px;
     }
+    @media (max-width: 300px) {
+      width: 280px;
+    }
     @media (max-width: 280px) {
       width: 250px;
     }
@@ -86,6 +89,9 @@
     }
     @media (max-width: 375px) {
         height: 250px;
+    }
+    @media (max-width: 300px) {
+      width: 280px;
     }
     @media (max-width: 280px) {
       width: 250px;
