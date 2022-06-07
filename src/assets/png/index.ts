@@ -62,3 +62,10 @@ export { default as SCREENSHOT_2_3 } from './screenshot_2_3.png'
 export { default as SCREENSHOT_2_4 } from './screenshot_2_4.png'
 export { default as SCREENSHOT_2_5 } from './screenshot_2_5.png'
 export { default as SCREENSHOT_3_1 } from './screenshot_3_1.png'
+export { default as ROCKET_CHILD } from './rocket_child.png'
+export { default as JASA_PEMBUATAN_ICON } from './jasa_pembuatan_website.png'
+export { default as TEMUKAN_KEBUTUHAN_ICON } from './temukan_kebutuhan_anda.png'
+export { default as REKOMENDASI_ICON } from './rekomendasi-icon.png'
+
+
+

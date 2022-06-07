@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import Styles from './styles.module.scss'
 import { HeaderComponent, FooterComponent } from '../../components/'
-import { HomeGeneralAdLayout, HomeBannerLayout, HomeTrainingLayout, HomeServiceLayout, HomeTestimonyLayout } from '../../layouts'
+import { HomeGeneralAdLayout, HomeBannerLayout, HomeTrainingLayout, HomeServiceLayout, HomeTestimonyLayout, HomeInfoLayout, HomeCardLayout } from '../../layouts'
 import TrainingAction from '../../store/reducers/training/actions'
 import { useDispatch } from 'react-redux'
 import { AuthContext } from '../../App'
@@ -77,7 +77,9 @@ export default function MainPage() {
         <HomeGeneralAdLayout/>
         <HomeTrainingLayout controlRef={ trainingRef }/>
         <HomeServiceLayout controlRef={ serviceRef }/>
+        <HomeInfoLayout />
         <HomeTestimonyLayout/>
+        <HomeCardLayout />
       </div>
 
       <FooterComponent controlRef={ askRef }/>

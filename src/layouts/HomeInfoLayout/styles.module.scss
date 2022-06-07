@@ -1,0 +1,291 @@
+.Container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.Main {
+  display: flex;
+  justify-content: center;
+  padding-inline: 70px;
+  padding-bottom: 200px;
+
+  @media (max-width: 1300px) {
+    padding-inline: 0;
+  }
+
+  .Image {
+    // flex: 0.5;
+    display: flex;
+    align-items: center;
+    width: 450px;
+    height: 450px;
+
+    @media (max-width: 1100px) {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .Content {
+    // width: 100vw;
+    .Label {
+      width: 410px;
+
+      @media (max-width: 450px) {
+        width: 300px;
+      }
+      @media (max-width: 375px) {
+        width: 300px;
+      }
+      @media (max-width: 330px) {
+        width: 280px;
+      }
+      @media (max-width: 280px) {
+        width: 100px;
+      }
+      span {
+        color: #0e4647;
+        font-size: 35px;
+        font-weight: 500;
+
+        @media (max-width: 1080px) {
+          font-size: 28px;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 24px;
+        }
+
+        @media (max-width: 412px) {
+          font-size: 18px;
+        }
+
+        @media (max-width: 375px) {
+          font-size: 28px;
+        }
+
+        @media (max-width: 280px) {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .Text {
+      padding-top: 15px;
+      width: 800px;
+
+      @media (max-width: 1400px) {
+        width: 650px;
+      }
+      @media (max-width: 1300px) {
+        width: 600px;
+      }
+
+      @media (max-width: 1200px) {
+        width: 600px;
+      }
+
+      @media (max-width: 1100px) {
+        width: 700px;
+      }
+
+      @media (max-width: 900px) {
+        width: 650px;
+      }
+
+      @media (max-width: 700px) {
+        width: 600px;
+      }
+
+      @media (max-width: 630px) {
+        width: 500px;
+      }
+
+      @media (max-width: 530px) {
+        width: 400px;
+      }
+
+      @media (max-width: 480px) {
+        width: 100%;
+      }
+
+      @media (max-width: 375px) {
+        width: 100%;
+      }
+
+      @media (max-width: 280px) {
+        font-size: 12px;
+      }
+
+      span {
+        color: #0e4647;
+        font-size: 20px;
+        font-weight: 400;
+
+        @media (max-width: 412px) {
+          font-size: 18px;
+        }
+
+        @media (max-width: 375px) {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .ContentIcon {
+      width: 800px;
+      height: auto;
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+
+      @media (max-width: 1400px) {
+        width: 650px;
+      }
+
+      @media (max-width: 1300px) {
+        width: 700px;
+      }
+
+
+      @media (max-width: 1130px) {
+        width: 600px;
+      }
+
+      @media (max-width: 700px) {
+        width: 100%;
+      }
+
+      @media (max-width: 480px) {
+        width: 400px;
+        flex-direction: column;
+        row-gap: 10px;
+      }
+      @media (max-width: 450px) {
+        width: 300px;
+      }
+
+      @media (max-width: 375px) {
+        width: 100%;
+      }
+
+      .ItemLeft {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        column-gap: 10px;
+
+        .Item {
+          display: flex;
+          align-items: center;
+
+          .Icon {
+            @media (max-width: 280px) {
+              font-size: 15px;
+            }
+          }
+
+          span {
+            color: #0e4647;
+            font-size: 22px;
+            font-weight: 500;
+            padding-left: 15px;
+
+            @media (max-width: 1400px) {
+              font-size: 20px;
+              padding-left: 5px;
+            }
+
+            @media (max-width: 1300px) {
+              padding-left: 5px;
+            }
+
+            @media (max-width: 630px) {
+              font-size: 14px;
+            }
+            @media (max-width: 480px) {
+              font-size: 18px;
+            }
+
+            @media (max-width: 420px) {
+              font-size: 14px;
+            }
+            @media (max-width: 280px) {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+
+    .ItemRight {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      column-gap: 10px;
+
+      .Item {
+        display: flex;
+        align-items: center;
+
+        .Icon {
+          @media (max-width: 280px) {
+            font-size: 15px;
+          }
+        }
+
+        span {
+          color: #0e4647;
+          font-size: 22px;
+          font-weight: 500;
+          padding-left: 15px;
+
+          @media (max-width: 1400px) {
+            font-size: 20px;
+            padding-left: 5px;
+          }
+
+          @media (max-width: 1300px) {
+            padding-left: 5px;
+          }
+
+          @media (max-width: 630px) {
+            font-size: 14px;
+          }
+
+          @media (max-width: 480px) {
+            font-size: 18px;
+          }
+          @media (max-width: 420px) {
+            font-size: 14px;
+          }
+
+          @media (max-width: 280px) {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 700px) {
+      width: 100vw;
+      padding-inline: 40px;
+    }
+
+    @media (max-width: 480px) {
+      width: 100vw;
+      padding-inline: 40px;
+    }
+
+    @media (max-width: 320px) {
+      padding-inline: 10px;
+    }
+  }
+}

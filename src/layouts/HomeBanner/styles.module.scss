@@ -55,6 +55,14 @@ $breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px) !default;
         font-size: 20px;
       }
 
+      @media (max-width: 550px) {
+        font-size: 28px;
+      }
+
+      @media (max-width: 425px) {
+        font-size: 25px;
+      }
+
       span {
         color: #0E4647;
       }

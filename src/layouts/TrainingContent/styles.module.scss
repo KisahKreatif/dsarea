@@ -5,6 +5,10 @@
 .Title {
   margin-inline: 70px;
   margin-top: 40px;
+
+  @media (max-width: 280px) {
+    margin-inline: 40px;
+  }
   span {
     font-size: 36px;
     font-weight: 600;
@@ -12,6 +16,8 @@
     @media (max-width: 500px) {
       font-size: 24px;
     }
+
+ 
   }
 }
 
@@ -19,6 +25,10 @@
   margin-inline: 70px;
   margin-bottom: 20px;
   margin-top: 30px;
+
+  @media (max-width: 280px) {
+    margin-inline: 40px;
+  }
   span {
     font-size: 24px;
     font-weight: 600;

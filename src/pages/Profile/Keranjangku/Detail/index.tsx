@@ -41,7 +41,7 @@ export default function KeranjangkuDetailPage() {
 
   useEffect(() => {
     if (profile)
-      setTransact((prev: any) => ({ ...prev, participant: profile.fullname, phoneNumber: profile.phoneNumber.slice(3), email: profile.email }))
+      setTransact((prev: any) => ({ ...prev, participant: profile.fullname, phoneNumber: profile.phoneNumber?.slice(3), email: profile.email }))
   }, [profile])
 
   const breadcrumbs = useMemo(() => {

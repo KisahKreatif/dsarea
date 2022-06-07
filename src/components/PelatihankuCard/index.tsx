@@ -5,9 +5,22 @@ import onRupiah from '../../helpers/onRupiah'
 import { ICardProps } from './index.interface'
 import Styles from './styles.module.scss'
 
+// const data = { 
+//   icon : "Excel",
+//   title : "Word From Zero to Hero",
+//   price : {
+//     regular: 50000,
+//     special : 75000,
+//   },
+//   hasVideo : true,
+//   hasLiveZoom : true,
+//   hasLiveGroup: true,
+//   status: "Aktif",
+//   timeDescription : `Total 4x pertemuan (30 menit - 1 jam) Setiap hari Sabtu pukul 16.00 WIB`,
+// }
+
 export default function PelatihankuCardComponent(props: ICardProps) {
   const { data } = props
-
   return (
     <div className={ Styles.Container }>
       <div>
@@ -79,3 +92,5 @@ export default function PelatihankuCardComponent(props: ICardProps) {
     </div>
   )
 }
+
+

@@ -71,6 +71,7 @@ export default function TrainingCard(props: ICardProps) {
       <Button onClick={ () => navigate(`/pelatihan/${ data._id }`) } variant='outlined'>Join Now</Button>
     )
   }, [type])
+ 
 
   return (
     <div className={ MemoizedContainerClass }>
