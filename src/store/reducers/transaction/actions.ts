@@ -13,6 +13,17 @@ export default class TransactionAction {
     })
   }
 
+  static chargeVA = (payload: iTransactionProps, token: string) => {
+    return axios({
+      url: '/sale/VA',
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token
+      },
+      data: payload
+    })
+  }
+
   static fetchById = (id: string, token: string) => {
     return axios({
       url: '/sale/' + id,

@@ -66,6 +66,7 @@ export { default as ROCKET_CHILD } from './rocket_child.png'
 export { default as JASA_PEMBUATAN_ICON } from './jasa_pembuatan_website.png'
 export { default as TEMUKAN_KEBUTUHAN_ICON } from './temukan_kebutuhan_anda.png'
 export { default as REKOMENDASI_ICON } from './rekomendasi-icon.png'
+export { default as BNI_TRANSACTION_LOGO } from './bni_transaction_logo.png'
 
 
 

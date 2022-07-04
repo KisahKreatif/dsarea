@@ -1,7 +1,7 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
 import { Button, CircularProgress, InputAdornment, MenuItem, Radio, Skeleton, styled, TextField } from '@mui/material'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { BCA_TRANSACTION_LOGO, DANA_TRANSACTION_LOGO, LINKAJA_TRANSACTION_LOGO, MANDIRI_TRANSACTION_LOGO, OVO_TRANSACTION_LOGO, QRIS_TRANSACTION_LOGO, SHOPEEPAY_TRANSACTION_LOGO } from '../../assets/png';
+import { BCA_TRANSACTION_LOGO, BNI_TRANSACTION_LOGO, DANA_TRANSACTION_LOGO, LINKAJA_TRANSACTION_LOGO, MANDIRI_TRANSACTION_LOGO, OVO_TRANSACTION_LOGO, QRIS_TRANSACTION_LOGO, SHOPEEPAY_TRANSACTION_LOGO } from '../../assets/png';
 import Styles from './styles.module.scss'
 import { QRCodeCanvas } from 'qrcode.react'
 import copy from 'copy-to-clipboard'
@@ -54,8 +54,9 @@ export default function DetailTransaction(props: iDetailTransactProps) {
   const [showMethods, setShowMethods]: [number, Function] = useState(0)
   const [paymentDetail, setPaymentDetail]: [any, Function] = useState(null)
   const [loading, setLoading]: [number, Function] = useState(1)
-
+  const [formDisabled, setFormDisabled]: [boolean, Function] = useState(false)
   const { profile } = useSelector(({ user }: any) => user)
+  let interval: any;
 
   useEffect(() => {
     setLoading(0)
@@ -70,19 +71,33 @@ export default function DetailTransaction(props: iDetailTransactProps) {
     return null
   }, [profile])
 
+  useEffect(() => {
+    return () => {
+      if (interval)
+        clearInterval(interval)
+    }
+  }, [])
+
   const TransactionTypeCallback = useCallback(() => {
-    if (paymentDetail?.paymentMethod === 'bca') {
+    if (paymentDetail?.paymentMethod === 'VA-BCA') {
       return (
         <div className={ Styles.TransactionType }>
           <img src={ BCA_TRANSACTION_LOGO } alt="BCA_TRANSACTION_LOGO" />
           <span>BCA Virtual Account</span>
         </div>
       )
-    } else if (paymentDetail?.paymentMethod === 'mandiri') {
+    } else if (paymentDetail?.paymentMethod === 'VA-MANDIRI') {
       return (
         <div className={ Styles.TransactionType }>
           <img src={ MANDIRI_TRANSACTION_LOGO } alt="MANDIRI_TRANSACTION_LOGO" />
           <span>Mandiri Virtual Account</span>
+        </div>
+      )
+    } else if (paymentDetail?.paymentMethod === 'VA-BNI') {
+      return (
+        <div className={ Styles.TransactionType }>
+          <img src={ BNI_TRANSACTION_LOGO } alt="BNI_TRANSACTION_LOGO" />
+          <span>BNI Virtual Account</span>
         </div>
       )
     } else if (paymentDetail?.paymentMethod === 'ID_DANA') {
@@ -124,6 +139,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
 
   const TransactionCallback = useCallback(() => {
     if (paymentDetail) {
+      console.log(paymentDetail)
       if (paymentDetail?.metode === 'qris') {
         return (
           <div className={ Styles.Control }>
@@ -133,16 +149,16 @@ export default function DetailTransaction(props: iDetailTransactProps) {
             </div>
           </div>
         )
-      } else if (paymentDetail?.metode === 'va') {
+      } else if (paymentDetail?.paymentMethod.includes('VA-')) {
         return (
           <div className={ Styles.Interact }>
             <div className={ Styles.Control }>
               <label>No. Virtual Account</label>
               <div>
-                <span>88085081211918150</span>
+                <span>{ paymentDetail.accountNumber }</span>
               </div>
             </div>
-            <CopyButton value={ '88085081211918150' }/>
+            <CopyButton value={ paymentDetail.accountNumber }/>
           </div>
         )
       }
@@ -170,21 +186,58 @@ export default function DetailTransaction(props: iDetailTransactProps) {
         window.open(googleLoginURL, "_blank")
         return setLoading(0)
       }
-      const { data: { data: result } } = await TransactionAction.charge({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined }, token)
+      let unParsedResult: any = await TransactionAction.charge({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined }, token);
+     
+      // let unParsedResult: any = {
+      //   data: {
+      //     data: {
+      //       "phoneNumber": "+6285274528960",
+      //       "invoice": "INV/742022/DSA/0000138",
+      //       "userId": "624bf035f295dc90cb32eb4a",
+      //       "totalPrice": "10000",
+      //       "name": "Ikhrom Wicaksono",
+      //       "email": "ikhromwicaksono92@gmail.com",
+      //       "paymentMethod": "VA-BNI",
+      //       "accountNumber": "8930449968002784",
+      //       "courseTitle": "Excel for Intermediate",
+      //       "courseId": "626ab44a3b06de6a3ce54b85",
+      //       "classType": "sendiri",
+      //       "paymentStatus": "PENDING",
+      //       "chargeID": "62c248e2b2572644ce27d5ed",
+      //       "externalID": "VA_fixed-1656899810053"
+      //     }
+      //   }
+      // };
+      if (data.paymentMethod === 'BCA' || data.paymentMethod === 'BNI' || data.paymentMethod === 'MANDIRI')
+      // console.log({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod })
+        unParsedResult = await TransactionAction.chargeVA({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod }, token)
+      else
+      // console.log({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined })
+        unParsedResult = await TransactionAction.charge({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined }, token)
+      
+      const { data: { data: result } }: any = unParsedResult
       setPaymentDetail(result)
       setLoading(0)
-      switch (result.paymentMethod) {
-        case 'ID_OVO':
-          break;
-        case 'ID_SHOPEEPAY':
-          window.open(result.action.mobile_deeplink_checkout_url, '_blank');
-          break;
-        default:
-          window.open(result.action.desktop_web_checkout_url, '_blank');
-          break;
-      }
-    } catch (error) {
-      console.log(error, 'onSubmit DetailTransaction Error')
+      if (result.paymentMethod.includes("ID_"))
+        switch (result.paymentMethod) {
+          case 'ID_OVO':
+            break;
+          case 'ID_SHOPEEPAY':
+            window.open(result.action.mobile_deeplink_checkout_url);
+            break;
+          default:
+            window.open(result.action.desktop_web_checkout_url);
+            break;
+        }
+      setFormDisabled(true)
+      interval = setInterval(() => {
+        (async () => {
+          const { data: { data: statusRenew } } = await TransactionAction.fetchById(paymentDetail?._id, token)
+          console.log(statusRenew)
+        })()
+      }, 60000)
+    } catch (error: any) {
+      console.log(error.response, 'onSubmit DetailTransaction Error')
       setLoading(0)
     }
   }
@@ -223,6 +276,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
             name="type"
             required
             select
+            disabled={formDisabled}
             >
             <MenuItem value={'sendiri'}>1 Orang</MenuItem>
             <MenuItem value={'berdua'}>2 Orang</MenuItem>
@@ -232,19 +286,19 @@ export default function DetailTransaction(props: iDetailTransactProps) {
           <CssTextField required value={ data.email } onChange={ onChangeData } name="email" disabled label="Alamat email anda" fullWidth/>
         </div>
         <div className={ Styles.Control }>
-          <CssTextField required value={ data.participant } onChange={ onChangeData } name="participant" label="Nama" fullWidth/>
+          <CssTextField disabled={ formDisabled } required value={ data.participant } onChange={ onChangeData } name="participant" label="Nama" fullWidth/>
         </div>
         <div className={ Styles.Control }>
-          <CssTextField required value={ data.phoneNumber } onChange={ onChangeData } name="phoneNumber" InputProps={ 
+          <CssTextField disabled={ formDisabled } required value={ data.phoneNumber } onChange={ onChangeData } name="phoneNumber" InputProps={ 
             { startAdornment: <InputAdornment position='start'>+62</InputAdornment> }
           } label="Nomor HP Anda" fullWidth/>
         </div>
         <div className={ `${ Styles.Companion } ${ data.type === 'sendiri' && Styles.Disabled }` }>
           <div className={ Styles.Control }>
-            <CssTextField required={ data.type === 'berdua' } value={ data.second_participant } onChange={ onChangeData } name="second_participant" label="Nama Peserta 2" fullWidth/>
+            <CssTextField disabled={ formDisabled } required={ data.type === 'berdua' } value={ data.second_participant } onChange={ onChangeData } name="second_participant" label="Nama Peserta 2" fullWidth/>
           </div>
           <div className={ Styles.Control }>
-            <CssTextField required={ data.type === 'berdua' } value={ data.second_participant_phoneNumber } onChange={ onChangeData } name="second_participant_phoneNumber" label="Nomor HP Peserta 2" InputProps={ 
+            <CssTextField disabled={ formDisabled } required={ data.type === 'berdua' } value={ data.second_participant_phoneNumber } onChange={ onChangeData } name="second_participant_phoneNumber" label="Nomor HP Peserta 2" InputProps={ 
               { startAdornment: <InputAdornment position='start'>+62</InputAdornment> }
             } fullWidth/>
           </div>
@@ -252,7 +306,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       </div>
       <div className={ `${ Styles.Card } ${ Boolean(paymentDetail) && Styles.Off }` }>
         <div className={ Styles.Control }>
-          <CssTextField label="Kode Referral (Optional)" fullWidth/>
+          <CssTextField disabled={ formDisabled } label="Kode Referral (Optional)" fullWidth/>
         </div>
         <div className={ Styles.Payment }>
           <div className={ Styles.Method }>
@@ -294,7 +348,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                   <Radio checked={ data.paymentMethod === 'ID_OVO' }/>
                 </div>
               </Button>
-              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'ID_SHOPEEPAY' })) } disabled={ data.paymentMethod === 'ID_SHOPEEPAY' } className={ data.paymentMethod === 'ID_SHOPEEPAY' ? Styles.Selected : '' }>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'ID_SHOPEEPAY' })) } disabled={ data.paymentMethod === 'ID_SHOPEEPAY' } className={ Styles.ShopeePay }>
                 <div>
                   <img style={ { width: '90%', height: 'auto', transform: 'translateY(-35px)' } } src={ SHOPEEPAY_TRANSACTION_LOGO } alt="SHOPEEPAY_TRANSACTION_LOGO" />
                 </div>
@@ -303,6 +357,39 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 </div>
                 <div className={ Styles.Radio }>
                   <Radio checked={ data.paymentMethod === 'ID_SHOPEEPAY' }/>
+                </div>
+              </Button>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'BNI' })) } disabled={ data.paymentMethod === 'BNI' } className={ data.paymentMethod === 'BNI' ? Styles.Selected : '' }>
+                <div>
+                  <img src={ BNI_TRANSACTION_LOGO } alt="BNI_TRANSACTION_LOGO" />
+                </div>
+                <div>
+                  <span>BNI Virtual Account</span>
+                </div>
+                <div className={ Styles.Radio }>
+                  <Radio checked={ data.paymentMethod === 'BNI' }/>
+                </div>
+              </Button>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'MANDIRI' })) } disabled={ data.paymentMethod === 'MANDIRI' } className={ data.paymentMethod === 'MANDIRI' ? Styles.Selected : '' }>
+                <div>
+                  <img src={ MANDIRI_TRANSACTION_LOGO } alt="MANDIRI_TRANSACTION_LOGO" />
+                </div>
+                <div>
+                  <span>Mandiri Virtual Account</span>
+                </div>
+                <div className={ Styles.Radio }>
+                  <Radio checked={ data.paymentMethod === 'MANDIRI' }/>
+                </div>
+              </Button>
+              <Button disableRipple onClick={ () => setData((prev: any) => ({ ...prev, paymentMethod: 'BCA' })) } disabled={ data.paymentMethod === 'BCA' } className={ data.paymentMethod === 'BCA' ? Styles.Selected : '' }>
+                <div>
+                  <img src={ BCA_TRANSACTION_LOGO } alt="BCA_TRANSACTION_LOGO" />
+                </div>
+                <div>
+                  <span>BCA Virtual Account</span>
+                </div>
+                <div className={ Styles.Radio }>
+                  <Radio checked={ data.paymentMethod === 'BCA' }/>
                 </div>
               </Button>
             </div>
@@ -349,7 +436,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
         <div className={ Styles.Control }>
           <label>ID Pemesanan</label>
           <div>
-            <span>DSA-12435556754357753</span>
+            <span>{ paymentDetail?.invoice }</span>
           </div>
         </div>
       </div>

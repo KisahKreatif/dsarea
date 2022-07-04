@@ -155,7 +155,10 @@
       transition: 0.2s;
       &.Active {
         opacity: 1;
-        height: 210px;
+        height: 371px;
+        @media (min-width: 600px) {
+          height: 320px;
+        }
       }
       button {
         width: 100%;
@@ -170,6 +173,12 @@
         padding-left: 15px;
         border-radius: 0;
         transition: 0.2s;
+
+        &.ShopeePay {
+          @media (min-width: 600px) {
+            display: none;
+          }
+        }
 
         div {
           &:first-child {

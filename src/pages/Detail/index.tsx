@@ -19,16 +19,13 @@ export default function DetailPage() {
     paymentMethod: '',
     second_participant: '',
     second_participant_phoneNumber: ''
-      
   })
   const params: any = useParams()
   const { profile } = useSelector(({ user }: any) => user)
   
   useEffect(() => {
     TrainingAction.fetchById(params.id).then((res: any) => {
-      setTimeout(() => {
-        setDetail(res)
-      }, 2000)
+      setDetail(res)
     }).catch((error: any) => {
       console.log(error, 'DetailPage > TrainingAction.fetchById')
     })

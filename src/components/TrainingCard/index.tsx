@@ -16,7 +16,6 @@ export default function TrainingCard(props: ICardProps) {
   const { classes } = useSelector(({ cart }: any) => cart)
   const token = useMemo(() => {
     const access_token = localStorage.getItem('token')
-
     if (access_token) return access_token
 
     return null

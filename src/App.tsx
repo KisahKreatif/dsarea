@@ -33,6 +33,7 @@ function App() {
   
   useEffect(() => {
     let token = localStorage.getItem('token')
+    // let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGJmMDM1ZjI5NWRjOTBjYjMyZWI0YSIsImlhdCI6MTY1NjQyNzU3M30.W6XDvojB55-gOpfxyF4aH8W1teZkS5gY5pHJ7H23ais'
     if (token) {
       dispatch(UserAction.login(token))
       setToken(token)
@@ -40,7 +41,7 @@ function App() {
     }
     const search = window.location.search
     const params = new URLSearchParams(search)
-    token = params.get('param')
+    // token = params.get('param')
     dispatch(UserAction.login(token))
     if (token && typeof token === 'string') handleSetToken(token)
     // eslint-disable-next-line
