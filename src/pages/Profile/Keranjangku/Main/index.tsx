@@ -8,7 +8,7 @@ import Styles from './styles.module.scss'
 
 export default function IndexPage() {
   const [search, setSearch] = useState('')
-  const { classes } = useSelector(({ training }: any) => training)
+  const { classes } = useSelector(({ cart }: any) => cart)
   const [filteredClasses, setFilteredClasses] = useState([])
 
   useEffect(() => {

@@ -9,34 +9,22 @@ import Styles from './styles.module.scss'
 export default function PelatihankuPage() {
   const [search, setSearch]: [string, Function] = useState('')
   const { privateClasses } = useSelector(({ training }: any) => training)
-  const [filteredClasses, setFilteredClasses] = useState([ 
-  { 
-    icon : "Excel",
-    title : "Word From Zero to Hero",
-    price : {
-      regular: 50000,
-      special : 75000,
-    },
-    hasVideo : true,
-    hasLiveZoom : true,
-    hasLiveGroup: true,
-    status: "active",
-    timeDescription : `Total 4x pertemuan (30 menit - 1 jam) Setiap hari Sabtu pukul 16.00 WIB`,
-  } 
-])
+  const [filteredClasses, setFilteredClasses] = useState([])
 
-  // useEffect(() => {
-  //   let mount = true
-  //   if (mount) {
-  //     if (filteredClasses.length === 0)
-  //       setFilteredClasses(privateClasses)
-  //     debounce(() => setFilteredClasses(privateClasses.filter((el: any) => el.title.toLowerCase().includes(search?.toLowerCase()))), 500)()
-  //   }
-  //   return () => {
-  //     mount = false
-  //   }
-  // }, [privateClasses, search])
+  useEffect(() => {
+    let mount = true
+    if (mount) {
+      setFilteredClasses(privateClasses.filter((each: any) => each.status === 'active' && each.title.toLowerCase().includes(search?.toLowerCase())))
+    }
+    return () => {
+      mount = false
+    }
+  }, [privateClasses])
 
+  useEffect(() => {
+    debounce(() => setFilteredClasses((prev: any) => prev.filter((el: any) => el.title.toLowerCase().includes(search?.toLowerCase()))), 500)()
+  }, [search])
+  
   return (
     <div className={ Styles.Container }>
       <ProfileTitleLayout title="Daftar Pelatihan Aktif" searchValue={ search } searchOnChange={ (e: any) => setSearch(e.target.value) }/>

@@ -26,6 +26,8 @@ export default function DetailPage() {
   useEffect(() => {
     TrainingAction.fetchById(params.id).then((res: any) => {
       setDetail(res)
+      if (res.transaction)
+        setTransact(res.transaction)
     }).catch((error: any) => {
       console.log(error, 'DetailPage > TrainingAction.fetchById')
     })

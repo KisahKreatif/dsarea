@@ -57,6 +57,13 @@ export default function TrainingCard(props: ICardProps) {
   }, [type, classes])
 
   const MemoizedActionButton = useCallback(() => {
+    if (!token) {
+      const api: string = 'https://api.dsarea.com'
+      const googleLoginURL = `${api}/api/auth/login/google`
+      return (
+        <Button onClick={ () => window.open(googleLoginURL, "_self") } variant='outlined'>Join Now</Button>
+      )
+    }
     if (type === 'history') {
       return (
         <Button onClick={ () => navigate(`/profile/riwayat-pelatihan/${ data._id }`) } variant='outlined'>Review</Button>
@@ -69,7 +76,7 @@ export default function TrainingCard(props: ICardProps) {
     return (
       <Button onClick={ () => navigate(`/pelatihan/${ data._id }`) } variant='outlined'>Join Now</Button>
     )
-  }, [type])
+  }, [type, token])
  
 
   return (

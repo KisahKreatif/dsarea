@@ -77,13 +77,13 @@ export default function PelatihankuCardComponent(props: ICardProps) {
             <div>
               <Videocam sx={ { color: '#000', fontSize: 24, transform: 'translateY(2px)' } }/>
               <div>
-                <span onClick={ () => window.open('https://us02web.zoom.us/j/862736e723632846266r626ossjsjs', '_blank') }>https://us02web.zoom.us/j/862736e723632846266r626ossjsjs</span>
+                <span onClick={ () => window.open(data.link.googleClass, '_blank') }>{ data.link.googleClass }</span>
               </div>
             </div>
             <div>
               <WhatsApp sx={ { color: '#000', fontSize: 24, transform: 'translateY(2px)' } }/>
               <div>
-                <span onClick={ () => window.open('https://us02web.zoom.us/j/862736e723632846266r626ossjsjs', '_blank') }>https://us02web.zoom.us/j/862736e723632846266r626ossjsjs</span>
+                <span onClick={ () => window.open(data.link.discussionGroup, '_blank') }>{ data.link.discussionGroup }</span>
               </div>
             </div>
           </div>

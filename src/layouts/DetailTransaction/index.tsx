@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { iDetailTransactProps } from './index.interface';
 import onRupiah from '../../helpers/onRupiah';
 import TransactionAction from '../../store/reducers/transaction/actions';
+import TrainingAction from '../../store/reducers/training/actions';
 
 const CssTextField = styled(TextField)({
   '& label': {
@@ -208,14 +209,13 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       //     }
       //   }
       // };
-      console.log(unParsedResult, 'result')
       if (data.paymentMethod === 'BCA' || data.paymentMethod === 'BNI' || data.paymentMethod === 'MANDIRI')
       // console.log({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod })
         unParsedResult = await TransactionAction.chargeVA({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod }, token)
       else
       // console.log({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined })
         unParsedResult = await TransactionAction.charge({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined }, token)
-      
+      console.log(unParsedResult, 'unpARSED')
       const { data: { data: result } }: any = unParsedResult
       setPaymentDetail(result)
       setLoading(0)
@@ -226,16 +226,24 @@ export default function DetailTransaction(props: iDetailTransactProps) {
           case 'ID_SHOPEEPAY':
             window.open(result.action.mobile_deeplink_checkout_url);
             break;
-          default:
+          case 'ID_DANA':
             window.open(result.action.desktop_web_checkout_url);
+            break;
+          default:
+            window.open(result.action.desktop_web_checkout_url, '_self');
             break;
         }
       setFormDisabled(true)
       interval = setInterval(() => {
-        (async () => {
-          const { data: { data: statusRenew } } = await TransactionAction.fetchById(paymentDetail?._id, token)
-          console.log(statusRenew)
-        })()
+        TrainingAction.fetchById(result._id).then((res: any) => {
+          setData(res.transaction)
+          setPaymentDetail(res.transaction)
+          console.log(res.transaction, 'DETIKAN')
+          if (paymentDetail.paymentStatus !== 'PENDING')
+            clearInterval(interval)
+        }).catch((error: any) => {
+          console.log(error, 'DetailPage > TrainingAction.fetchById')
+        })
       }, 60000)
     } catch (error: any) {
       console.log(error.response, 'onSubmit DetailTransaction Error')
@@ -246,9 +254,15 @@ export default function DetailTransaction(props: iDetailTransactProps) {
   const onStatusRenew = async () => {
     try {
       setLoading(1)
-      const { data: { data: result } } = await TransactionAction.fetchById(paymentDetail?._id, token)
-      
-      setPaymentDetail(result)
+      TrainingAction.fetchById(paymentDetail._id).then((res: any) => {
+        setData(res.transaction)
+        setPaymentDetail(res.transaction)
+        console.log(res.transaction, 'DETIKAN')
+        if (res.transaction.paymentStatus !== 'PENDING')
+          clearInterval(interval)
+      }).catch((error: any) => {
+        console.log(error, 'DetailPage > TrainingAction.fetchById')
+      })
       setLoading(0)
     } catch (error) {
       console.log(error, 'onStatusRenew')
@@ -429,7 +443,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
           <div className={ Styles.Control }>
             <label>Total Nominal</label>
             <div>
-            <span>{ paymentDetail ? onRupiah(paymentDetail?.totalPrice) : '' }</span>
+            <span>{ paymentDetail ? onRupiah(paymentDetail?.price) : '' }</span>
             </div>
           </div>
           {/* <Button className={ Styles.Copy }>Salin</Button> */}

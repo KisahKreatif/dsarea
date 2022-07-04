@@ -9,58 +9,22 @@ export default function IndexPage () {
   const [search, setSearch]: [string, Function] = useState('')
 
   const { privateClasses } = useSelector(({ training }: any) => training)
-  const [filteredClasses, setFilteredClasses] = useState([
-    {
-      icon: "",
-      title: "Word From Zero to Hero",
-      price : {
-        regular: 50000,
-        special: 70000,
-      },
-      status: "inactive"
-    },
-    {
-      icon: "",
-      title: "Word From Zero to Hero",
-      price : {
-        regular: 50000,
-        special: 70000,
-      },
-      status: "inactive"
-    },
-    {
-      icon: "",
-      title: "Word From Zero to Hero",
-      price : {
-        regular: 50000,
-        special: 70000,
-      },
-      status: "inactive"
-    },
-    {
-      icon: "",
-      title: "Word From Zero to Hero",
-      price : {
-        regular: 50000,
-        special: 70000,
-      },
-      status: "inactive"
+  const [filteredClasses, setFilteredClasses] = useState([])
+
+  useEffect(() => {
+    let mount = true
+    console.log(privateClasses)
+    if (mount) {
+      setFilteredClasses(privateClasses.filter((each: any) => each.status !== 'active' && each.title.toLowerCase().includes(search?.toLowerCase())))
     }
-  ])
+    return () => {
+      mount = false
+    }
+  }, [privateClasses])
 
-  // useEffect(() => {
-  //   let mount = true
-  //   if (mount) {
-  //     setFilteredClasses(privateClasses)
-  //   }
-  //   return () => {
-  //     mount = false
-  //   }
-  // }, [privateClasses])
-
-  // useEffect(() => {
-  //   debounce(() => setFilteredClasses((prev: any) => prev.filter((el: any) => el.title.toLowerCase().includes(search?.toLowerCase()))), 500)()
-  // }, [search])
+  useEffect(() => {
+    debounce(() => setFilteredClasses((prev: any) => prev.filter((el: any) => el.title.toLowerCase().includes(search?.toLowerCase()))), 500)()
+  }, [search])
 
   return (
     <div className={ Styles.Container }>
