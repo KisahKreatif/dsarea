@@ -186,7 +186,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
         window.open(googleLoginURL, "_blank")
         return setLoading(0)
       }
-      let unParsedResult: any = await TransactionAction.charge({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined }, token);
+      let unParsedResult: any
      
       // let unParsedResult: any = {
       //   data: {
@@ -208,6 +208,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       //     }
       //   }
       // };
+      console.log(unParsedResult, 'result')
       if (data.paymentMethod === 'BCA' || data.paymentMethod === 'BNI' || data.paymentMethod === 'MANDIRI')
       // console.log({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod })
         unParsedResult = await TransactionAction.chargeVA({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod }, token)

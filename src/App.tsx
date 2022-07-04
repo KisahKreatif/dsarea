@@ -41,7 +41,7 @@ function App() {
     }
     const search = window.location.search
     const params = new URLSearchParams(search)
-    // token = params.get('param')
+    token = params.get('param')
     dispatch(UserAction.login(token))
     if (token && typeof token === 'string') handleSetToken(token)
     // eslint-disable-next-line

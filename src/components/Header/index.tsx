@@ -31,7 +31,7 @@ export default function HeaderComponent(props: iHeaderProps) {
   const handleLoginWithGoogle = () => {
     const api: string = 'https://api.dsarea.com'
     const googleLoginURL = `${api}/api/auth/login/google`
-    window.open(googleLoginURL, "_blank")
+    window.open(googleLoginURL, "_self")
   }
 
   const onClickCart = () => {
