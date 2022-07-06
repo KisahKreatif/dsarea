@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Styles from './styles.module.scss'
 import { OFFICE_WORD_LOGO } from '../../assets/png'
 import { Button, Skeleton } from '@mui/material'
@@ -7,6 +7,10 @@ import onRupiah from '../../helpers/onRupiah'
 export default function DetailDescription(props: any) {
   const { data } = props
   const [content, setContent] = useState('description')
+
+  useEffect(() => {
+    console.log(data, 'data')
+  }, [])
 
   const memoizedLearningMaterial = useMemo(() => {
     if (!data) {
@@ -86,12 +90,9 @@ export default function DetailDescription(props: any) {
           <div className={ `${ Styles.Benefits } ${ !data?.benefit || data?.benefit.length <= 0 && Styles.None }` }>
             <span>Benefit:</span>
             <ul>
-              <li>Akses materi selamanya + bonus materi</li>
-              <li>Video pembahasan materi</li>
-              <li>Soal latihan</li>
-              <li>Grup bimbingan</li>
-              <li>Channel lowongan kerja</li>
-              <li>e-Certificate</li>
+              { data.benefit.map((each: string, key: any) => (
+                <li key={ key }>{ each }</li>
+              )) }
             </ul>
           </div>
         </div>
@@ -109,7 +110,7 @@ export default function DetailDescription(props: any) {
             <Skeleton variant='text'/>
           ) }
           { data ? (
-            <span>Total 4x pertemuan (30 menit - 1 jam) Setiap hari Sabtu pukul 16.00 WIB</span>
+            <span>{ data.timeDescription }</span>
           ) : (
             <Skeleton variant='text' height={ 40 }/>
           ) }
