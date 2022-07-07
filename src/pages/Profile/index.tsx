@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../App'
 import { HeaderComponent, ProfileSidebarComponent } from '../../components'
 import TrainingAction from '../../store/reducers/training/actions'
 import Styles from './styles.module.scss'
@@ -11,10 +12,17 @@ export default function ProfilePage() {
     const access_token = localStorage.getItem('token')
     return access_token
   }, [])
+  const { isSuper } = useContext(AuthContext)
   const location = useLocation()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
+    if (token) {
+      if (!token || isSuper) {
+        navigate(-1)
+      }
+    }
     dispatch(TrainingAction.fetchPrivate(token))
   }, [])
 

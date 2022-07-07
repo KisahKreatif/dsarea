@@ -1,10 +1,20 @@
-import React, { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../App'
 import { HeaderComponent, SuperSidebarComponent } from '../../components'
 import Styles from './styles.module.scss'
 
 export default function SuperPage() {
   const location = useLocation()
+  const { isSuper } = useContext(AuthContext)
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!isSuper || !token) {
+      navigate(-1)
+    }
+  }, [])
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

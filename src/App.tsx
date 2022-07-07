@@ -101,7 +101,6 @@ const AppRoutes = (props: iAppProps) => {
       <Route path="keranjang" element={ <CartPage/> }/>
       <Route path="pelatihan" element={ <TrainingPage/> }/>
       <Route path="pelatihan/:id" element={ <DetailPage/> }/>
-      { token && isSuper && (
       <Route path="super" element={ <SuperPage/> }>
         <Route index element={ <SuperDashboard/> }/>
         <Route path="kelas" element={ <SuperTrainingPage/> }>
@@ -115,8 +114,6 @@ const AppRoutes = (props: iAppProps) => {
           <Route path="input/:id" element={ <SuperReviewInputPage/> }/>
         </Route>
       </Route>
-      ) }
-      { token && !isSuper && (
       <Route path="profile" element={ <ProfilePage/> }>
         <Route path="pelatihanku" element={ <PelatihankuPage/> }/>
         <Route path="keranjangku" element={ <KeranjangkuPage/> }>
@@ -129,7 +126,6 @@ const AppRoutes = (props: iAppProps) => {
         </Route>
         <Route path="cara-pembelian" element={ <CaraPembelianPage/> }/>
       </Route>
-      ) }
     </Routes>
   )
 }
