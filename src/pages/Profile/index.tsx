@@ -19,7 +19,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (token) {
-      if (!token || isSuper) {
+      if (!token) {
         navigate(-1)
       }
     }

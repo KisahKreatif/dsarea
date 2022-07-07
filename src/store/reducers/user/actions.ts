@@ -10,6 +10,8 @@ export default class UserAction {
         "Authorization": `Bearer ${ token }`
       }
     }).then(res => {
+      if (res.data.role === 'admin')
+        localStorage.setItem('isSuper', '1')
       dispatch({
         type: 'SET_PROFILE',
         payload: res.data
