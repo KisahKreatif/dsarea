@@ -32,6 +32,20 @@ export default function PelatihankuCardComponent(props: ICardProps) {
           <span className={ Styles.Price }>{ onRupiah(data.price.regular) }/Orang</span>
           <span className={ Styles.Price }>{ onRupiah(data.price.special) }/2 Orang</span>
         </div>
+        <div className={ Styles.MiniLinks }>
+          <div>
+            <Videocam sx={ { color: '#000', fontSize: 24, transform: 'translateY(2px)' } }/>
+            <div>
+              <span onClick={ () => window.open(data.link.googleClass, '_blank') }>Google Classroom</span>
+            </div>
+          </div>
+          <div>
+            <WhatsApp sx={ { color: '#000', fontSize: 24, transform: 'translateY(2px)' } }/>
+            <div>
+              <span onClick={ () => window.open(data.link.discussionGroup, '_blank') }>WhatsApp Group</span>
+            </div>
+          </div>
+        </div>
         <div className={ Styles.Benefit }>
           <ul>
             { data.hasVideo && (
@@ -77,13 +91,13 @@ export default function PelatihankuCardComponent(props: ICardProps) {
             <div>
               <Videocam sx={ { color: '#000', fontSize: 24, transform: 'translateY(2px)' } }/>
               <div>
-                <span onClick={ () => window.open(data.link.googleClass, '_blank') }>{ data.link.googleClass }</span>
+                <span onClick={ () => window.open(data.link.googleClass, '_blank') }>Google Classroom</span>
               </div>
             </div>
             <div>
               <WhatsApp sx={ { color: '#000', fontSize: 24, transform: 'translateY(2px)' } }/>
               <div>
-                <span onClick={ () => window.open(data.link.discussionGroup, '_blank') }>{ data.link.discussionGroup }</span>
+                <span onClick={ () => window.open(data.link.discussionGroup, '_blank') }>WhatsApp Group</span>
               </div>
             </div>
           </div>

@@ -59,6 +59,13 @@ export default function DetailTransaction(props: iDetailTransactProps) {
   const { profile } = useSelector(({ user }: any) => user)
   let interval: any;
 
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      console.log(window.innerWidth, 'inner')
+    })
+  }, [])
+
   useEffect(() => {
     setLoading(0)
   }, [data])
@@ -224,10 +231,10 @@ export default function DetailTransaction(props: iDetailTransactProps) {
           case 'ID_OVO':
             break;
           case 'ID_SHOPEEPAY':
-            window.open(result.action.mobile_deeplink_checkout_url);
+            window.open(result.action.mobile_deeplink_checkout_url, '_self');
             break;
           case 'ID_DANA':
-            window.open(result.action.desktop_web_checkout_url);
+            window.open(result.action.desktop_web_checkout_url, '_self');
             break;
           default:
             window.open(result.action.desktop_web_checkout_url, '_self');
