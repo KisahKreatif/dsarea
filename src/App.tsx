@@ -81,9 +81,10 @@ function App() {
 }
 
 const AppRoutes = (props: iAppProps) => {
-  const { isSuper, token } = props
+  const { isSuper } = props
   const dispatch = useDispatch()
   const location = useLocation()
+  let token = localStorage.getItem('token')
 
   useEffect(() => {
     dispatch(ReviewAction.fetch())
