@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AuthContext } from '../../../../App'
 import { PagerComponent } from '../../../../components'
 import { SuperTrainingInputLayout } from '../../../../layouts'
 import TrainingAction from '../../../../store/reducers/training/actions'
@@ -60,6 +59,7 @@ export default function SuperInputPage() {
         console.log(new Error(error))
       })
     }
+    // eslint-disable-next-line
   }, [params])
   //   {
   //     "title": "Excel for beginnerr",

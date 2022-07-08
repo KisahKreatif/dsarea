@@ -76,11 +76,11 @@ export default function DetailDescription(props: any) {
         { data ? (
         <div className={ `${ Styles.Description } ${ content === 'description' && Styles.Active }` }>
           <div className={ Styles.Main }>
-            <span>{ data.description }</span>
+            <span style={ { whiteSpace: 'pre-wrap' } }>{ data.description }</span>
           </div>
           <div className={ Styles.Details }>
             { memoizedLearningMaterial.map((col: any, ind: number) => (
-            <ul style={ { width: `calc(100%/${ memoizedLearningMaterial.length })` } } key={ ind }>
+            <ul style={ { gridArea: `grid-${ ind }` } } key={ ind }>
               { col.map((row: any, key: number) => (
                 <li key={ key }>{ row }</li>
               )) }
@@ -110,7 +110,7 @@ export default function DetailDescription(props: any) {
             <Skeleton variant='text'/>
           ) }
           { data ? (
-            <span>{ data.timeDescription }</span>
+            <span style={{ whiteSpace: 'pre-wrap' }}>{ data.timeDescription }</span>
           ) : (
             <Skeleton variant='text' height={ 40 }/>
           ) }

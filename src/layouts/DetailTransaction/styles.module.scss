@@ -180,6 +180,12 @@
           }
         }
 
+        .Label {
+          @media (max-width: 350px) {
+            display: none;
+          }
+        }
+
         div {
           &:first-child {
             height: 100%;
@@ -192,6 +198,7 @@
               pointer-events: none;
             }
           }
+          
           &.Radio {
             flex: 1;
             height: 100%;

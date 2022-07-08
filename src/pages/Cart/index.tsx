@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { FooterComponent, HeaderComponent } from '../../components'
 import { CartContentLayout } from '../../layouts'

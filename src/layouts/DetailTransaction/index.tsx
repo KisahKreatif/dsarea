@@ -77,6 +77,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       return access_token
     
     return null
+    // eslint-disable-next-line
   }, [profile])
 
   useEffect(() => {
@@ -84,6 +85,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       if (interval)
         clearInterval(interval)
     }
+    // eslint-disable-next-line
   }, [])
 
   const TransactionTypeCallback = useCallback(() => {
@@ -147,7 +149,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
 
   const TransactionCallback = useCallback(() => {
     if (paymentDetail) {
-      console.log(paymentDetail)
       if (paymentDetail?.metode === 'qris') {
         return (
           <div className={ Styles.Control }>
@@ -217,12 +218,9 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       //   }
       // };
       if (data.paymentMethod === 'BCA' || data.paymentMethod === 'BNI' || data.paymentMethod === 'MANDIRI')
-      // console.log({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod })
         unParsedResult = await TransactionAction.chargeVA({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined, bankName: data.paymentMethod }, token)
       else
-      // console.log({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined })
         unParsedResult = await TransactionAction.charge({ ...data, phoneNumber: '+62' + data.phoneNumber, second_participant: data.second_participant ? data.second_participant : undefined, second_participant_phoneNumber: data.second_participant_phoneNumber ? '+62' + data.second_participant_phoneNumber : undefined }, token)
-      console.log(unParsedResult, 'unpARSED')
       const { data: { data: result } }: any = unParsedResult
       setPaymentDetail(result)
       setLoading(0)
@@ -245,7 +243,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
         TrainingAction.fetchById(result._id).then((res: any) => {
           setData(res.transaction)
           setPaymentDetail(res.transaction)
-          console.log(res.transaction, 'DETIKAN')
           if (paymentDetail.paymentStatus !== 'PENDING')
             clearInterval(interval)
         }).catch((error: any) => {
@@ -264,7 +261,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       TrainingAction.fetchById(paymentDetail._id).then((res: any) => {
         setData(res.transaction)
         setPaymentDetail(res.transaction)
-        console.log(res.transaction, 'DETIKAN')
         if (res.transaction.paymentStatus !== 'PENDING')
           clearInterval(interval)
       }).catch((error: any) => {
@@ -284,14 +280,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
         </div>
         <div className={ Styles.PackageControl }>
           <label>Pilih paket pelatihan</label>
-          {/* <Select
-            value={buyPackage}
-            onChange={(e) => setBuyPackage(e.target.value)}
-            input={ <OutlinedInput className={ Styles.StyledSelect }/> }
-          >
-            <MenuItem value={'sendiri'}>Sendiri</MenuItem>
-            <MenuItem value={'berdua'}>Berdua</MenuItem>
-          </Select> */}
           <CssTextField 
             value={data.type}
             onChange={ onChangeData }
@@ -341,7 +329,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 <div>
                   <img src={ LINKAJA_TRANSACTION_LOGO } alt="LINKAJA_TRANSACTION_LOGO" />
                 </div>
-                <div>
+                <div className={ Styles.Label }>
                   <span>Link Aja</span>
                 </div>
                 <div className={ Styles.Radio }>
@@ -352,7 +340,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 <div>
                   <img src={ DANA_TRANSACTION_LOGO } alt="DANA_TRANSACTION_LOGO" />
                 </div>
-                <div>
+                <div className={ Styles.Label }>
                   <span>DANA</span>
                 </div>
                 <div className={ Styles.Radio }>
@@ -363,7 +351,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 <div>
                   <img src={ OVO_TRANSACTION_LOGO } alt="OVO_TRANSACTION_LOGO" />
                 </div>
-                <div>
+                <div className={ Styles.Label }>
                   <span>OVO</span>
                 </div>
                 <div className={ Styles.Radio }>
@@ -374,7 +362,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 <div>
                   <img style={ { width: '90%', height: 'auto', transform: 'translateY(-35px)' } } src={ SHOPEEPAY_TRANSACTION_LOGO } alt="SHOPEEPAY_TRANSACTION_LOGO" />
                 </div>
-                <div>
+                <div className={ Styles.Label }>
                   <span>Shopeepay</span>
                 </div>
                 <div className={ Styles.Radio }>
@@ -385,7 +373,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 <div>
                   <img src={ BNI_TRANSACTION_LOGO } alt="BNI_TRANSACTION_LOGO" />
                 </div>
-                <div>
+                <div className={ Styles.Label }>
                   <span>BNI Virtual Account</span>
                 </div>
                 <div className={ Styles.Radio }>
@@ -396,7 +384,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 <div>
                   <img src={ MANDIRI_TRANSACTION_LOGO } alt="MANDIRI_TRANSACTION_LOGO" />
                 </div>
-                <div>
+                <div className={ Styles.Label }>
                   <span>Mandiri Virtual Account</span>
                 </div>
                 <div className={ Styles.Radio }>
@@ -407,7 +395,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
                 <div>
                   <img src={ BCA_TRANSACTION_LOGO } alt="BCA_TRANSACTION_LOGO" />
                 </div>
-                <div>
+                <div className={ Styles.Label }>
                   <span>BCA Virtual Account</span>
                 </div>
                 <div className={ Styles.Radio }>

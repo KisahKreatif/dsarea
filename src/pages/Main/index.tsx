@@ -1,26 +1,13 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Styles from './styles.module.scss'
 import { HeaderComponent, FooterComponent } from '../../components/'
 import { HomeGeneralAdLayout, HomeBannerLayout, HomeTrainingLayout, HomeServiceLayout, HomeTestimonyLayout, HomeInfoLayout, HomeCardLayout } from '../../layouts'
-import TrainingAction from '../../store/reducers/training/actions'
-import { useDispatch } from 'react-redux'
-import { AuthContext } from '../../App'
-import { useWindowDimensions } from '../../hooks'
 import { debounce } from '@mui/material'
-import { useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 export default function MainPage() {
-  const { isSuper } = useContext(AuthContext)
-  const token = useMemo(() => {
-    const access_token = localStorage.getItem('token')
-    if (access_token)
-      return access_token
-    return null
-  }, [])
   const [position, setPosition]: ['home' | 'online-training' | 'jasa' | 'tanya-kami', Function] = useState('home')
   const [scrollPosition, setScrollPosition] = useState(0)
-  const dispatch = useDispatch()
-  const { height: windowHeight } = useWindowDimensions()
   const trainingRef: any = useRef(null)
   const serviceRef: any = useRef(null)
   const askRef: any = useRef(null)

@@ -5,6 +5,10 @@ import { DSAREA_LOGO, INSTAGRAM_LOGO, TWITTER_LOGO, LINKEDIN_LOGO, TIKTOK_LOGO }
 
 export default function FooterComponent(props: any) {
   const { controlRef } = props
+
+  const onClickLink = (address: string) => {
+    return window.open(address, '_self')
+  }
   return (
     <footer ref={ controlRef } className={ Styles.Footer }>
       <div className={ Styles.FooterTopSide }>
@@ -42,19 +46,19 @@ export default function FooterComponent(props: any) {
             <span className={ Styles.FooterBottomTitle }>Sosial Media</span>
             <div className={ Styles.FooterSocialMedia }>
               {/* eslint-disable-next-line */}
-              <a href="#" style={ { marginRight: 27 } }>
+              <a href="#" onClick={ () => onClickLink('https://instagram.com/digitalskillsarea') } style={ { marginRight: 27 } }>
                 <img src={ INSTAGRAM_LOGO } alt="INSTAGRAM_LOGO" className={ Styles.FooterInstagram }/>
               </a>
               {/* eslint-disable-next-line */}
-              <a href="#" style={ { marginRight: 20 } }>
+              <a href="#" onClick={ () => onClickLink('https://twitter.com/digiskillsarea') } style={ { marginRight: 20 } }>
                 <img src={ TWITTER_LOGO } alt="TWITTER_LOGO" className={ Styles.FooterTwitter }/>
               </a>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a href="#" onClick={ () => onClickLink('https://www.linkedin.com/company/digitalskillsarea/') }>
                 <img src={ LINKEDIN_LOGO } alt="LINKEDIN_LOGO" className={ Styles.FooterLinkedin }/>
               </a>
               {/* eslint-disable-next-line */}
-              <a href="#">
+              <a href="#" onClick={ () => onClickLink('https://www.tiktok.com/@digitalskillsarea') }>
                 <img src={ TIKTOK_LOGO } alt="TIKTOK_LOGO" className={ Styles.FooterTiktok}/>
               </a>
             </div>

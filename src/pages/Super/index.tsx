@@ -1,21 +1,26 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../App'
 import { HeaderComponent, SuperSidebarComponent } from '../../components'
 import Styles from './styles.module.scss'
 
 export default function SuperPage() {
   const location = useLocation()
-  const isSuper = localStorage.getItem('isSuper')
   const navigate = useNavigate()
+  const isAllowed = useMemo(() => {
+    let allow = false
+    const access_token = localStorage.getItem('token')
+    const isSuper = localStorage.getItem('isSuper')
+    if (access_token && isSuper)
+      allow = true
+    return allow
+  }, [])
   
   useEffect(() => {
-    console.log(isSuper)
-    const token = localStorage.getItem('token')
-    if (!isSuper || !token) {
+    if (isAllowed) {
       navigate(-1)
     }
-  }, [isSuper])
+    // eslint-disable-next-line
+  }, [isAllowed])
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

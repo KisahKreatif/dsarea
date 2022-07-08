@@ -52,7 +52,7 @@ const Card = (props: ICardProps) => {
         <span>{ data.body }</span>
       </div>
       <div className={ Styles.Action }>
-        <Button variant='outlined' startIcon={ <img src={ WHATSAPP_LOGO } alt="WHATSAPP_LOGO" /> }>
+        <Button onClick={ () => window.open('https://wa.me/+6282289294805', '_self') } variant='outlined' startIcon={ <img src={ WHATSAPP_LOGO } alt="WHATSAPP_LOGO" /> }>
           
           <span>Contact Us</span>
         </Button>
