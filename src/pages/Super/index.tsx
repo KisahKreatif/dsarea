@@ -16,7 +16,7 @@ export default function SuperPage() {
   }, [])
   
   useEffect(() => {
-    if (isAllowed) {
+    if (!isAllowed) {
       navigate(-1)
     }
     // eslint-disable-next-line

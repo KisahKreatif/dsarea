@@ -6,7 +6,7 @@ import { iLayoutProps } from './index.interface'
 import Styles from './styles.module.scss'
 
 export default function SuperTitleLayout(props: iLayoutProps) {
-  const { title, searchValue, searchPlaceholder, buttonText, onAdd, onRemove, onChangeSearchValue } = props
+  const { title, searchValue, searchPlaceholder, buttonText, onAdd, onRemove, onChangeSearchValue, onDownload } = props
 
   const MemoizedAddButton = useCallback(() => {
     if (onAdd)
@@ -17,9 +17,22 @@ export default function SuperTitleLayout(props: iLayoutProps) {
         </Button>
       )
     return (
-      <div/>
+      <div style={ { display: 'none' } }/>
     )
   }, [onAdd])
+
+  const MemoizedDownloadButton = useCallback(() => {
+    if (onDownload)
+      return (
+        <Button onClick={ () => onDownload() }>
+          <img src={ BUTTON_PLUS_ICON } alt="BUTTON_PLUS_ICON" />
+          <span>{ buttonText ? buttonText : title }</span>
+        </Button>
+      )
+    return (
+      <div style={ { display: 'none' } }/>
+    )
+  }, [onDownload])
 
   const MemoizedRemoveButton = useCallback(() => {
     if (onRemove)
@@ -39,6 +52,7 @@ export default function SuperTitleLayout(props: iLayoutProps) {
         <span>{ title }</span>
         
         <MemoizedAddButton/>
+        <MemoizedDownloadButton/>
       </div>
       <div className={ Styles.SpaceBetween }>
         <div className={ `${ Styles.Search } ${ typeof searchValue !== 'string' && Styles.Off }` }>

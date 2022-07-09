@@ -6,4 +6,5 @@ export interface iLayoutProps {
   buttonText?: string
   onAdd?: Function
   onRemove?: any
+  onDownload?: Function
 }
