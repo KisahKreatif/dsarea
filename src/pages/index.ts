@@ -4,6 +4,7 @@ export { default as TrainingPage } from './Training'
 export { default as DetailPage } from './Detail'
 export { default as ProfilePage } from './Profile'
 export { default as SuperPage } from './Super'
+export { default as NotFoundPage } from './NotFound'
 
 export { default as PelatihankuPage } from './Profile/Pelatihanku'
 export { default as KeranjangkuPage } from './Profile/Keranjangku'

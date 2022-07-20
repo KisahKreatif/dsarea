@@ -13,6 +13,11 @@ export default function ProfileSidebarComponent(props: iSideBarProps) {
   const navigate = useNavigate()
   const { logout } = useContext(AuthContext)
 
+  const onLogout = () => {
+    navigate('/')
+    logout()
+  }
+
   return (
     <div className={ `${ Styles.Container } ${ sideBar && Styles.Active }` }>
       <div className={ Styles.Control }>
@@ -38,7 +43,7 @@ export default function ProfileSidebarComponent(props: iSideBarProps) {
         </Button>
       </div>
       <div className={ Styles.Control }>
-        <Button onClick={ logout } className={ Styles.RouteButton }>
+        <Button onClick={ onLogout } className={ Styles.RouteButton }>
           <img src={ LOGOUT_ICON } alt="LOGOUT_ICON"/>
           <span>Log out</span>
         </Button>

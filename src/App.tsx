@@ -8,6 +8,7 @@ import UserAction from './store/reducers/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviewAction from './store/reducers/review/actions';
 import TrainingAction from './store/reducers/training/actions';
+import NotFound from './pages/NotFound';
 
 const muiTheme = createTheme({
   typography: {
@@ -97,7 +98,7 @@ const AppRoutes = (props: iAppProps) => {
 
   return (
     <Routes>
-      <Route path="*" element={ <MainPage/> }/>
+      <Route index element={ <MainPage/> }/>
       <Route path="keranjang" element={ <CartPage/> }/>
       <Route path="pelatihan" element={ <TrainingPage/> }/>
       <Route path="pelatihan/:id" element={ <DetailPage/> }/>
@@ -126,6 +127,7 @@ const AppRoutes = (props: iAppProps) => {
         </Route>
         <Route path="cara-pembelian" element={ <CaraPembelianPage/> }/>
       </Route>
+      <Route path="*" element={ <NotFound/> }/>
     </Routes>
   )
 }
