@@ -45,12 +45,12 @@ export default function SuperInputPage() {
 
   const onSubmit = (e: any) => {
     e.preventDefault()
-    console.log({
-      name: review.name,
-      course: review.training.name,
-      rating: review.rating,
-      notes: review.note  
-    })
+    // console.log({
+    //   name: review.name,
+    //   course: review.training.name,
+    //   rating: review.rating,
+    //   notes: review.note  
+    // })
     if (token) {
       if (params.id) {
         dispatch(ReviewAction.edit({

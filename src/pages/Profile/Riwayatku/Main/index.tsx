@@ -13,7 +13,7 @@ export default function IndexPage () {
 
   useEffect(() => {
     let mount = true
-    console.log(privateClasses)
+    
     if (mount) {
       setFilteredClasses(privateClasses.filter((each: any) => each.status !== 'active' && each.title.toLowerCase().includes(search?.toLowerCase())))
     }

@@ -59,13 +59,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
   const { profile } = useSelector(({ user }: any) => user)
   let interval: any;
 
-
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      console.log(window.innerWidth, 'inner')
-    })
-  }, [])
-
   useEffect(() => {
     setLoading(0)
   }, [data])

@@ -26,7 +26,9 @@ export default function Dashboard() {
           "Nama Kelas": each?.courseTitle,
           "Tipe Kelas": each?.classType,
           "Nama Peserta 2": each?.secondParticipant,
-          "No Telepon Peserta 2": each?.secondParticipantPhoneNumber
+          "No Telepon Peserta 2": each?.secondParticipantPhoneNumber,
+          "Tanggal Bayar": new Date(each?.paidTime).toLocaleDateString(),
+          "Waktu Bayar": new Date(each?.paidTime).toLocaleTimeString()
         })), 'BUKTI_BAYAR_DSAREA')
       })
       .catch(err => {

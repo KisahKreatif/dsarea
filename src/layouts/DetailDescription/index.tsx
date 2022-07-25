@@ -8,10 +8,6 @@ export default function DetailDescription(props: any) {
   const { data } = props
   const [content, setContent] = useState('description')
 
-  useEffect(() => {
-    console.log(data, 'data')
-  }, [])
-
   const memoizedLearningMaterial = useMemo(() => {
     if (!data) {
       return []
