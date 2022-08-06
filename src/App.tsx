@@ -90,7 +90,7 @@ const AppRoutes = (props: iAppProps) => {
   useEffect(() => {
     dispatch(ReviewAction.fetch())
     dispatch(TrainingAction.fetch(token))
-  }, [])
+  }, [isSuper])
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

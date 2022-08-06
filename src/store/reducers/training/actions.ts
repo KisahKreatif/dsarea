@@ -3,10 +3,11 @@ import { iAddProps, iEditProps } from './actions.interface'
 
 export default class TrainingAction {
   static fetch = (token?: any) => async (dispatch: any, getState: any) => {
+    const isSuper = localStorage.getItem('isSuper')
     try {
       const { data: { data } } = await axios({
         method: 'GET',
-        url: token ? '/admin/class' : '/class',
+        url: token && isSuper ? '/admin/class' : '/class',
         headers: {
           Authorization: token && ('Bearer ' + token)
         }
@@ -39,10 +40,11 @@ export default class TrainingAction {
   }
 
   static fetchById = async (id: string, token?: any) => {
+    const isSuper = localStorage.getItem('isSuper')
     try {
       const { data: { data } } = await axios({
         method: 'GET',
-        url: token ? ('/admin/class/' + id) : ('/class/' + id),
+        url: token && isSuper ? ('/admin/class/' + id) : ('/class/' + id),
         headers: {
           Authorization: token && ('Bearer ' + token)
         }
