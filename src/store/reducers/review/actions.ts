@@ -1,16 +1,16 @@
 import axios from '../../../axios.config'
 import { iReviewEditProps, iReviewProps } from './actions.interface'
-const scriptedToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2JlZTc0MDVmZDdiOWYyZjgyMDU0YSIsImVtYWlsIjoiYnVkaWFuZHVrQGdtYWlsLmNvbSIsImlhdCI6MTY1MDcyMzUyMX0.Xj5py8zI5iOnpE2TYerB9vYV_h4PCIB3PUQo9CMfrkY'
+// const scriptedToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2JlZTc0MDVmZDdiOWYyZjgyMDU0YSIsImVtYWlsIjoiYnVkaWFuZHVrQGdtYWlsLmNvbSIsImlhdCI6MTY1MDcyMzUyMX0.Xj5py8zI5iOnpE2TYerB9vYV_h4PCIB3PUQo9CMfrkY'
 
 export default class ReviewAction {
-  static fetch = () => async (dispatch: any, getState: any) => {
+  static fetch = (token?: any) => async (dispatch: any, getState: any) => {
     try {
       const { data: { data } } = await axios({
         method: 'GET',
         url: '/testimony',
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Bearer ' + scriptedToken
+          "Authorization": token && ('Bearer ' + token)
         }
       })
       dispatch({
@@ -22,13 +22,13 @@ export default class ReviewAction {
     }
   }
 
-  static fetchById = async (id: string) => {
+  static fetchById = async (id: string, token?: any) => {
     try {
       const { data: { data } } = await axios({
         method: 'GET',
         url: '/testimony/' + id,
         headers: {
-          "Authorization": 'Bearer ' + scriptedToken
+          "Authorization": token && ('Bearer ' + token)
         }
       })
       return data
@@ -44,7 +44,7 @@ export default class ReviewAction {
         method: 'POST',
         url: '/testimony',
         headers: {
-          Authorization: 'Bearer ' + scriptedToken
+          Authorization: 'Bearer ' + token
         },
         data: payload
       })
@@ -59,13 +59,14 @@ export default class ReviewAction {
 
   static edit = (payload: iReviewEditProps, id: string, token: string) => async (dispatch: Function, getState: Function) => {
     try {
+      const access_token = localStorage.getItem('token')
       const { review: { testimonies } } = getState()
       const { data: { data } } = await axios({
         method: 'PATCH',
         url: '/testimony/' + id,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + scriptedToken
+          "Authorization": 'Bearer ' + token
         },
         data: payload
       })
@@ -84,7 +85,7 @@ export default class ReviewAction {
         method: 'DELETE',
         url: '/testimony/delete/many',
         headers: {
-          Authorization: 'Bearer ' + scriptedToken
+          Authorization: 'Bearer ' + token
         },
         data: {
           ids

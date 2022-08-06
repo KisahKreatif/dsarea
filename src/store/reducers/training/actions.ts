@@ -1,6 +1,5 @@
 import axios from '../../../axios.config'
 import { iAddProps, iEditProps } from './actions.interface'
-const scriptedToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2JlZTc0MDVmZDdiOWYyZjgyMDU0YSIsImVtYWlsIjoiYnVkaWFuZHVrQGdtYWlsLmNvbSIsImlhdCI6MTY0ODI1MzgyN30.XSyC_-JXcm8vnnraYEpTVLRFAT5-tI3p8p-2AMLd9us'
 
 export default class TrainingAction {
   static fetch = (token?: any) => async (dispatch: any, getState: any) => {
@@ -9,7 +8,7 @@ export default class TrainingAction {
         method: 'GET',
         url: token ? '/admin/class' : '/class',
         headers: {
-          Authorization: token && ('Bearer ' + scriptedToken)
+          Authorization: token && ('Bearer ' + token)
         }
       })
       dispatch({
@@ -45,7 +44,7 @@ export default class TrainingAction {
         method: 'GET',
         url: token ? ('/admin/class/' + id) : ('/class/' + id),
         headers: {
-          Authorization: token && ('Bearer ' + scriptedToken)
+          Authorization: token && ('Bearer ' + token)
         }
       })
       return data
@@ -60,7 +59,7 @@ export default class TrainingAction {
         method: 'DELETE',
         url: '/admin/class/deletemany',
         headers: {
-          Authorization: 'Bearer ' + scriptedToken
+          Authorization: 'Bearer ' + token
         },
         data: {
           ids
@@ -79,7 +78,7 @@ export default class TrainingAction {
         method: 'POST',
         url: '/admin/class',
         headers: {
-          Authorization: 'Bearer ' + scriptedToken
+          Authorization: 'Bearer ' + token
         },
         data: payload
       })
@@ -99,7 +98,7 @@ export default class TrainingAction {
         method: 'PATCH',
         url: '/admin/class/update/' + id,
         headers: {
-          Authorization: 'Bearer ' + scriptedToken
+          Authorization: 'Bearer ' + token
         },
         data: payload
       })

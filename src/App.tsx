@@ -17,7 +17,7 @@ const muiTheme = createTheme({
 })
 
 export const AuthContext = createContext({
-  token: 'token',
+  token: '',
   setToken: (token: string) => {},
   logout: () => {},
   isSuper: false
