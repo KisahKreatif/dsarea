@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReviewAction from './store/reducers/review/actions';
 import TrainingAction from './store/reducers/training/actions';
 import NotFound from './pages/NotFound';
+import TiktokPixel from 'tiktok-pixel';
 
 const muiTheme = createTheme({
   typography: {
@@ -33,6 +34,7 @@ function App() {
   }, [profile])
   
   useEffect(() => {
+    TiktokPixel.init('CBOAQLJC77U606K84BEG');
     let token = localStorage.getItem('token')
     // let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGJmMDM1ZjI5NWRjOTBjYjMyZWI0YSIsImlhdCI6MTY1NjQyNzU3M30.W6XDvojB55-gOpfxyF4aH8W1teZkS5gY5pHJ7H23ais'
     if (token) {

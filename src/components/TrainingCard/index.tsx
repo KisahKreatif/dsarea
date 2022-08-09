@@ -8,6 +8,7 @@ import onRupiah from '../../helpers/onRupiah'
 import CartAction from '../../store/reducers/cart/actions'
 import { ICardProps } from './index.interface'
 import Styles from './styles.module.scss'
+import TiktokPixel from 'tiktok-pixel'
 
 export default function TrainingCard(props: ICardProps) {
   const { type, data } = props
@@ -22,6 +23,14 @@ export default function TrainingCard(props: ICardProps) {
   }, [])
 
   const onAddToCart = (id: string) => {
+    TiktokPixel.track('AddToCart', {
+      content_type: 'product',
+      quantity: 1,
+      content_name: data.title,
+      content_id: id,
+      currency: 'IDR',
+      value: 1,
+    });
     if (token) dispatch(CartAction.add(id, token))
   }
 
