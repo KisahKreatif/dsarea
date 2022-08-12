@@ -1,10 +1,10 @@
-import { Autocomplete, Button, IconButton, TextField } from '@mui/material'
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { Autocomplete, Button, IconButton } from '@mui/material'
+import { useCallback, useContext, useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { DEFAULT_PROFILE_PICTURE, DSAREA_LOGO } from '../../assets/png'
 import { SearchSVG, ShoppingCartSVG } from '../../assets/svg'
 import Styles from './styles.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { AuthContext } from '../../App'
 import { iHeaderProps } from './index.interface'
 import { DensityMedium } from '@mui/icons-material'
@@ -12,19 +12,19 @@ import { DensityMedium } from '@mui/icons-material'
 export default function HeaderComponent(props: iHeaderProps) {
   const { sideBar, setSideBar, onChangeHome, homePosition } = props
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const location = useLocation()
   const { isSuper } = useContext(AuthContext)
   const { profile } = useSelector(({ user }: any) => user)
   const { classes } = useSelector(({ training }: any) => training)
   const { read: cartRead } = useSelector(({ cart }: any) => cart)
-  const [searchValue, setSearchValue] = useState(null)
+
   const user = useMemo(() => {
     if (profile) {
       return profile
     }
     return undefined
   }, [profile])
+
   const token = useMemo(() => {
     const access_token = localStorage.getItem('token')
     return access_token
@@ -67,12 +67,15 @@ export default function HeaderComponent(props: iHeaderProps) {
           freeSolo
           id="free-solo-2-demo"
           disableClearable
-          value={ searchValue }
           options={ classes }
+          filterOptions={ (x: any) => x }
           getOptionLabel={ (option: any) => option.title }
           onChange={ (event, newValue: any) => {
-            setSearchValue(newValue)
-            navigate('/pelatihan/' + newValue._id)
+            if (typeof newValue === 'string')
+              navigate('/pelatihan?filter=' + newValue)
+            else {
+              navigate('/pelatihan/' + newValue._id)
+            }
           } }
           renderInput={(params) => (
             <div ref={params.InputProps.ref}>
