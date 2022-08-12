@@ -31,7 +31,7 @@ export default function DetailPage() {
     }).catch((error: any) => {
       console.log(error, 'DetailPage > TrainingAction.fetchById')
     })
-  }, [])
+  }, [params.id])
 
   useEffect(() => {
     if (detail) 

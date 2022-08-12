@@ -1,5 +1,5 @@
-import { Button, IconButton } from '@mui/material'
-import { useCallback, useContext, useEffect, useMemo } from 'react'
+import { Autocomplete, Button, IconButton, TextField } from '@mui/material'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { DEFAULT_PROFILE_PICTURE, DSAREA_LOGO } from '../../assets/png'
 import { SearchSVG, ShoppingCartSVG } from '../../assets/svg'
@@ -16,7 +16,9 @@ export default function HeaderComponent(props: iHeaderProps) {
   const location = useLocation()
   const { isSuper } = useContext(AuthContext)
   const { profile } = useSelector(({ user }: any) => user)
+  const { classes } = useSelector(({ training }: any) => training)
   const { read: cartRead } = useSelector(({ cart }: any) => cart)
+  const [searchValue, setSearchValue] = useState(null)
   const user = useMemo(() => {
     if (profile) {
       return profile
@@ -61,7 +63,24 @@ export default function HeaderComponent(props: iHeaderProps) {
     }
     return (
       <div className={ Styles.SearchInput }>
-        <input placeholder='Mulai cari pelatihanmu' type="text" />
+        <Autocomplete
+          freeSolo
+          id="free-solo-2-demo"
+          disableClearable
+          value={ searchValue }
+          options={ classes }
+          getOptionLabel={ (option: any) => option.title }
+          onChange={ (event, newValue: any) => {
+            setSearchValue(newValue)
+            navigate('/pelatihan/' + newValue._id)
+          } }
+          renderInput={(params) => (
+            <div ref={params.InputProps.ref}>
+              <input type="text" placeholder='Mulai cari pelatihanmu' {...params.inputProps} />
+            </div>
+          )}
+        />
+        {/* <input placeholder='Mulai cari pelatihanmu' type="text" /> */}
         <IconButton disabled>
           <SearchSVG/>
         </IconButton>
