@@ -33,6 +33,7 @@ export default function HeaderComponent(props: iHeaderProps) {
   const handleLoginWithGoogle = () => {
     const api: string = 'https://api.dsarea.com'
     const googleLoginURL = `${api}/api/auth/login/google`
+    localStorage.clear()
     window.open(googleLoginURL, "_self")
   }
 
