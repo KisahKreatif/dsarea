@@ -68,6 +68,7 @@ export default function TrainingCard(props: ICardProps) {
   const MemoizedActionButton = useCallback(() => {
     if (!token) {
       const api: string = 'https://api.dsarea.com'
+      // const api: string = 'http://localhost:5200'
       const googleLoginURL = `${api}/api/auth/login/google`
       return (
         <Button onClick={ () => window.open(googleLoginURL, "_self") } variant='outlined'>Join Now</Button>

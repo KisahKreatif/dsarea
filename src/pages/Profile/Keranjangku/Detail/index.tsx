@@ -18,8 +18,7 @@ export default function KeranjangkuDetailPage() {
     courseId: '',
     paymentMethod: '',
     second_participant: '',
-    second_participant_phoneNumber: ''
-      
+    second_participant_phoneNumber: '',
   })
   const params: any = useParams()
   const { profile } = useSelector(({ user }: any) => user)

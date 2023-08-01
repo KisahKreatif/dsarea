@@ -173,7 +173,6 @@ export default function DetailTransaction(props: iDetailTransactProps) {
   const onChangeData = (e: any) => {
     setData((prev: any) => ({ ...prev, [e.target.name]: e.target.value }))
   }
-
   const onSubmit = async (e: any) => {
     e.preventDefault()
     try {
@@ -184,6 +183,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       }
       if (!token) {
         const api: string = 'https://api.dsarea.com'
+        // const api: string = 'http://localhost:5200'
         const googleLoginURL = `${api}/api/auth/login/google`
         window.open(googleLoginURL, "_blank")
         return setLoading(0)
@@ -309,7 +309,7 @@ export default function DetailTransaction(props: iDetailTransactProps) {
       </div>
       <div className={ `${ Styles.Card } ${ Boolean(paymentDetail) && Styles.Off }` }>
         <div className={ Styles.Control }>
-          <CssTextField disabled={ formDisabled } label="Kode Referral (Optional)" fullWidth/>
+          <CssTextField disabled={ formDisabled } label="Kode Referral (Optional)" value={data.referral} onChange={onChangeData} name="referral" fullWidth/>
         </div>
         <div className={ Styles.Payment }>
           <div className={ Styles.Method }>

@@ -18,7 +18,8 @@ export default function DetailPage() {
     courseId: '',
     paymentMethod: '',
     second_participant: '',
-    second_participant_phoneNumber: ''
+    second_participant_phoneNumber: '',
+    referral: ''
   })
   const params: any = useParams()
   const { profile } = useSelector(({ user }: any) => user)
